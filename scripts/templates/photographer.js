@@ -1,3 +1,5 @@
+/* Cette fonction en paramètre data 
+*/
 function photographerTemplate(data) {
     const { name, portrait } = data;
 
