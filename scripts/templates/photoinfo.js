@@ -1,5 +1,5 @@
 // Définition du constructeur PhotographerInfo
-export default class PhotographerInfo {
+export class PhotographerInfo {
     constructor(data) {
         this.name = data.name;
         this.id = data.id;
@@ -9,4 +9,5 @@ export default class PhotographerInfo {
         this.price = data.price;
         this.portrait = data.portrait;
     }
+    
 }

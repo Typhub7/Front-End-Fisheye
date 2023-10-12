@@ -1,5 +1,5 @@
-import PhotographerInfo from '../templates/photoinfo.js';
- 
+import { fetchPhotographersData } from '../utils/photographerData.js';
+
 // Cette fonction utilise la méthode fetch pour récupérer les données depuis le fichier JSON
 // Retourne les donnéees en ne récupérant que les données photographers
 function photographerTemplate(photographer) {
@@ -17,30 +17,7 @@ function photographerTemplate(photographer) {
     </article>
     `
     return {newPhotographerCard}
-    }
-
-    async function getPhotographers() {
-    try {
-        const response = await fetch('../data/photographers.json');
-
-        if (!response.ok) {
-            throw new Error('Erreur lors de la récupération des données des photographes.');
-        }
-
-        const data = await response.json();
-        const photographers = data.photographers.map(photographer => new PhotographerInfo(photographer));
-        window.appData = { photographers };
-        console.log(data)
-        
-        return {photographers};
-        
-    } catch (error) {
-        console.error(error);
-        // En cas d'erreur remplir le champ pour gérer l'erreur ou renvoyer une valeur par défaut si nécessaire
-        return [] ;
-    }
-}
-    
+}  
 
 // Cette fonction reçoit  un tableau contennant les données des photographes
 // Elle cible le DOM section HMTL de classe .photographer_section
@@ -56,9 +33,8 @@ async function displayData(photographers) {
 // Cette fonction démarre le processus de traitement.
 async function init() {
     // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
+    const { photographers } = await fetchPhotographersData();
     displayData(photographers);
 }
 
 init();
-

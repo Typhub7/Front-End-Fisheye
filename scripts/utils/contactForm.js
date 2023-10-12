@@ -11,7 +11,6 @@ function closeModal() {
 
 // ------ DOM Elements ------ 
 const modalBtn = document.querySelectorAll(".modal-btn");
-const closeBtn = document.querySelector(".close")
 const form = document.querySelector("form")
 const modal = document.querySelector(".modal")
 const contactModal = document.querySelector("#contact-modal")
@@ -41,7 +40,6 @@ const twoOrMoreRegEx = /.{2,}/;
 
 // ------ Event listener for open and close modal  ------ 
 modalBtn.forEach(launchBtn => {launchBtn.addEventListener("click", launchModal);})
-closeBtn.addEventListener("click", closeModal); 
 
 /** All Check informations Function **/
 // This function check that the name and firstname  
