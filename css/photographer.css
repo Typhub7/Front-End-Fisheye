@@ -8,11 +8,16 @@
     margin: 0 100px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 40px;
     flex-wrap: wrap;
 }
-
-.photographer_citycountry {
+.photograph_name {
+    font-size: 4rem;
+    line-height: 3.5rem;
+    color : #D3573C;
+}
+.photograph_citycountry {
     font-size: 1.5rem;
     line-height: 2rem;
     color: #901c1c; 
@@ -25,7 +30,7 @@
     color: #525252;
   }
 
-.photographer_details {
+.photograph_details {
     display: flex;
     flex-direction: column;
     gap: 10px;
