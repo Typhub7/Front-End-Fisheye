@@ -22,17 +22,15 @@ async function displayPhotographerProfile() {
         const photographerProfilContainer = document.querySelector(".photograph-header");
         const PhotogInfoToDisplay =
         `
-        <div class="photograph-header">
-            <div  class="photographer_details" >
-                <h2 class="photographer_name">${photographer.name}</h2>
-                <h3 class="photographer_citycountry">${photographer.city}, ${photographer.country}</h3>
-                <p class="photographer_tagline">${photographer.tagline}</p>
-            </div>
-            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-            
-            <div>
-                <img class="photographer_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">
-            </div>
+        <div  class="photographer_details" >
+            <h2 class="photographer_name">${photographer.name}</h2>
+            <h3 class="photographer_citycountry">${photographer.city}, ${photographer.country}</h3>
+            <p class="photographer_tag">${photographer.tagline}</p>
+        </div>
+        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        
+        <div>
+            <img class="photographer_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">
         </div>
         `
         // Appel de la fonction pour récupérer des données du photographe 

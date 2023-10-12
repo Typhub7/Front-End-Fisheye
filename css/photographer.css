@@ -6,7 +6,39 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
+
+.photographer_citycountry {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #901c1c; 
+}
+
+.photograph_tag {
+    font-size: 1.12rem;
+    line-height: 1.5rem;
+  
+    color: #525252;
+  }
+
+.photographer_details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+  
+
+.photograph_picture {
+    height: 12.5rem;
+    width: 12.5rem;
+    border-radius: 50%;
+    object-position: 80% 10%;
+    object-fit: cover;
+  }
 
 .contact_button {
     font-size: 20px;
