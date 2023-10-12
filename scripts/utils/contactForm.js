@@ -10,12 +10,11 @@ function closeModal() {
 
 
 // ------ DOM Elements ------ 
-const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeBtn = document.querySelector(".close")
 const form = document.querySelector("form")
-const modalBody = document.querySelector(".modal-body")
-const formBody = document.querySelector(".form-body")
+const modal = document.querySelector(".modal")
+const contactModal = document.querySelector("#contact-modal")
 
 // ID for form informations
 const tagFirst = document.querySelector("#first")
@@ -29,7 +28,6 @@ const messageMail = document.querySelector("#message-mail")
 
 // ----- Other Variable ------
 let errorDetected = false
-const currentDate = new Date()
 const formErrors = { shortName : "Il faut au minimum 2 charactères.",
                    badName : "Un caractère n'est pas reconnu. Merci de corriger.",
                    badEmail : "Veuillez renseigner une adresse mail valide.",
