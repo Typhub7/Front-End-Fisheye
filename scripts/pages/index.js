@@ -1,4 +1,4 @@
-import { fetchPhotographersData } from '../utils/photographerData.js';
+import { fetchPhotographersData } from '../api/photographerData.js';
 
 // Cette fonction utilise la méthode fetch pour récupérer les données depuis le fichier JSON
 // Retourne les donnéees en ne récupérant que les données photographers
@@ -8,7 +8,7 @@ function photographerTemplate(photographer) {
     `
     <article>
         <a  href="../photographer.html?id=${photographer.id}">  
-            <img class="photographer_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">
+            <img class="photographer_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">          
             <h2 class="photographer_name">${photographer.name}</h2>
         </a>
         <p class="photographer_citycountry">${photographer.city}, ${photographer.country}</p>

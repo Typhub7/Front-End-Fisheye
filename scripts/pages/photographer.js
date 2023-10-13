@@ -1,4 +1,4 @@
-import { fetchPhotographersData } from '../utils/photographerData.js';
+import { fetchPhotographersData } from '../api/photographerData.js';
 import { PhotographerInfo } from '../templates/photoinfo.js';
 
 // Recupération de l'Id transmise par  l'url
@@ -22,7 +22,7 @@ async function displayPhotographerProfile() {
         const photographerProfilContainer = document.querySelector(".photograph-header");
         const PhotogInfoToDisplay =
         `
-        <div  class="photograph_details" >
+        <div class="photograph_details" >
             <h2 class="photograph_name">${photographer.name}</h2>
             <h3 class="photograph_citycountry">${photographer.city}, ${photographer.country}</h3>
             <p class="photograph_tag">${photographer.tagline}</p>

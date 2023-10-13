@@ -67,12 +67,13 @@ h1 {
 }
 
 .photographer_picture {
-    height: 200px;
     width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 50%;
+    position: relative;
 }
-
+  
 .photographer_place {
     font-size: 13px;
     line-height: 17px;
