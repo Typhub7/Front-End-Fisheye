@@ -1,4 +1,3 @@
-
 export class Media {
     constructor(data) {
       this.id = data.id;

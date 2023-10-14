@@ -7,11 +7,13 @@ function photographerTemplate(photographer) {
     const newPhotographerCard = 
     `
     <article>
-        <a  href="../photographer.html?id=${photographer.id}">  
-            <img class="photographer_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">          
+        <a  href="../photographer.html?id=${photographer.id}"> 
+            <div class="photographer_imgcontainer">
+                <img class="photographer_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">          
+            </div>
             <h2 class="photographer_name">${photographer.name}</h2>
         </a>
-        <p class="photographer_citycountry">${photographer.city}, ${photographer.country}</p>
+        <h3 class="photographer_citycountry">${photographer.city}, ${photographer.country}</h3>
         <p class="photographer_tagline">${photographer.tagline}</p>
         <p class="photographer_price">${photographer.price} €/jour</p>
     </article>

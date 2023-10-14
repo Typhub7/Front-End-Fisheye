@@ -1,5 +1,5 @@
 import { fetchPhotographersData } from '../api/photographerData.js';
-import { PhotographerInfo } from '../templates/photoinfo.js';
+import { PhotographerInfo } from '../class/photoinfo.js';
 
 // Recupération de l'Id transmise par  l'url
 const urlParams = new URLSearchParams(window.location.search);

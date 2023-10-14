@@ -40,6 +40,11 @@ h1 {
     margin-right: 100px;
 }
 
+h3 {
+    font-style: normal;
+    font-weight: 400; 
+}
+
 .logo {
     height: 50px;
     margin-left: 100px;
@@ -66,36 +71,40 @@ h1 {
     margin-bottom: 0;
 }
 
+.photographer_citycountry {
+    font-size: 0.813rem;
+    line-height: 1rem;
+    color: #901c1c; 
+}
+
 .photographer_picture {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    position: absolute;
+    right : -25px;
+    top : -25px;
+}
+
+.photographer_imgcontainer {
+    position:relative;
     width: 200px;
     height: 200px;
-    object-fit: cover;
     border-radius: 50%;
-    position: relative;
-}
-  
-.photographer_place {
-    font-size: 13px;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: center;
-    padding-bottom: 3px;
-    color: #901c1c;
+    overflow: hidden;
+    box-shadow: 0 0 8px grey;
 }
 
 .photographer_tagline {
-    font-size: 10px;
-    line-height: 13px;
+    font-size: 0.625rem;
+    line-height: 1rem;
     letter-spacing: 0em;
-    text-align: center;
-    padding-bottom: 3px;
     color: #000;
 }
 .photographer_price {
-    font-size: 9px;
-    line-height: 12px;
+    font-size: 0.563rem;
+    line-height: 1rem;
     letter-spacing: 0em;
     text-align: center;
-    padding-bottom: 3px;
     color: #757575;
 }
