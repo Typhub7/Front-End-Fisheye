@@ -6,6 +6,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/848fe89c63.js" crossorigin="anonymous"></script>
     <title>Fisheye - photographe </title>
   </head>
   
@@ -17,11 +18,10 @@
     </header>
     
     <main id="main">
-      <section class="photograph-header">
-        
-      </section>
+      <section class="photograph-header"></section>
+      <section class="photograph-gallery"></section>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" class="hidden">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
@@ -54,8 +54,9 @@
 			</div>
 		</div>
     <script type="module" src="scripts/class/photoinfo.js"></script>
+    <script type="module" src="scripts/class/mediaclass.js"></script>
     <script type="module" src="scripts/api/photographerData.js"></script>
-    <script type="module" src="/scripts/helpers/contactForm.js" ></script>
-    <script type="module" src="/scripts/pages/photographer.js" ></script>
+    <script type="module" src="scripts/pages/photographer.js" ></script>
+    <script type="module" src="scripts/helpers/contactForm.js" defer></script>
   </body>
 </html>

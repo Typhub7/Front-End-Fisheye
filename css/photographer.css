@@ -1,7 +1,3 @@
-#contact_modal {
-    display: none;
-}
-
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -14,6 +10,7 @@
 }
 .photograph_name {
     font-size: 4rem;
+    font-weight: 400;
     line-height: 3.5rem;
     color : #D3573C;
 }
@@ -55,4 +52,54 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.photograph-gallery {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap : 45px;
+    margin: 35px 100px 0 100px;
+}
+
+.gallery_thumbnail {
+  height: 300px;
+  width: 350px; 
+  border-radius: 5px;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.gallery_card figcaption {
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.gallery_card figcaption h2 {
+    color: #901C1C;
+    font-weight: 400;
+    line-height: normal; 
+    font-size: 1.5rem;
+    width: 80%;
+}
+
+.btn_like { 
+    background-color: transparent;
+    border: none;
+}
+
+.numberLike {
+    color: #901C1C;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 1.5rem;
+}
+
+.fas {
+    color: #901C1C;
+    font-size: 1.2rem;
 }

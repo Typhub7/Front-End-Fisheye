@@ -1,19 +1,18 @@
 function displayModal() {
-    const modal = document.getElementById("contact_modal");
+  const modal = document.querySelector("#contact_modal");
 	modal.style.display = "block";
 }
 
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+  const modal = document.querySelector("#contact_modal");
+  modal.style.display = "none";
 }
 
 
-// ------ DOM Elements ------ 
-const modalBtn = document.querySelectorAll(".modal-btn");
+// ------ DOM Elements ------
 const form = document.querySelector("form")
 const modal = document.querySelector(".modal")
-const contactModal = document.querySelector("#contact-modal")
+const contactModal = document.querySelector("#contact_modal")
 
 // ID for form informations
 const tagFirst = document.querySelector("#first")
@@ -38,8 +37,11 @@ const nameFirstRegEx = new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$")
 const emailRegEx = new RegExp("^[a-zA-Z0-9._-]{2,}@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$")
 const twoOrMoreRegEx = /.{2,}/;
 
-// ------ Event listener for open and close modal  ------ 
-modalBtn.forEach(launchBtn => {launchBtn.addEventListener("click", launchModal);})
+// ------ Event listener for open and close modal  ------
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modalBtn = document.querySelector(".contact_button");
+  modalBtn.addEventListener("click", displayModal); })
 
 /** All Check informations Function **/
 // This function check that the name and firstname  
@@ -109,7 +111,7 @@ const validationFetch = async () => {
     const response = await fetch(url, requestOptions)
 
     if (response.ok) {
-      formBody.reset()        // If Ok, Clean the form
+      form.reset()        // If Ok, Clean the form au lieu de formBody
       console.log('Réponse du serveur :', response)
       return response.json(); // If answer is ok, response can be add here         } else {    
     } else {
@@ -132,7 +134,7 @@ function submitAndFetch(event) {
  
     validationFetch()
     console.log("ValidationFetch OK")
-    formBody.reset();     // Remove It when validation fetch will be ok
+    form.reset();     // Remove It when validation fetch will be ok
     closeModal();
     console.log("close Modal Ok")
 

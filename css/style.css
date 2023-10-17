@@ -23,10 +23,13 @@ li {
 
 body {
     font-family: "DM Sans", sans-serif;
-
+    width: 1340px;
+    margin: 0 auto;
 }
 
 /* general*/
+
+
 header {
     display: flex;
     flex-direction: row;
@@ -67,8 +70,9 @@ h3 {
 
 .photographer_name {
     color: #D3573C;
-    font-size: 36px;
+    font-size: 2.25rem;
     margin-bottom: 0;
+    font-weight: 400;
 }
 
 .photographer_citycountry {
@@ -81,9 +85,11 @@ h3 {
     width: 250px;
     height: 250px;
     object-fit: cover;
+    object-position: 60% 50%;
     position: absolute;
-    right : -25px;
+    right : -35px;
     top : -25px;
+
 }
 
 .photographer_imgcontainer {
