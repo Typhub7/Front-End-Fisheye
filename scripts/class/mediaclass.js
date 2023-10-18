@@ -1,7 +1,6 @@
 export class Media {
     constructor(data) {
       this.id = data.id;
-      this.image = data.image;
       this.title = data.title;
       this.imgPhotographerId = data.photographerId;
       this.likes = data.likes;

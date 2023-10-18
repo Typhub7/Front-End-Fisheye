@@ -103,3 +103,25 @@
     color: #901C1C;
     font-size: 1.2rem;
 }
+
+.photograph-global-like {
+    position: sticky;
+    bottom: 0;
+    left: 100%;
+    background-color: #DB8876;
+    border-radius: 5px; 
+    height: 89px;
+    width: 376px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.photographer_counter {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap : 50px;
+}

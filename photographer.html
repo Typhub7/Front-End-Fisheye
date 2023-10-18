@@ -20,11 +20,13 @@
     <main id="main">
       <section class="photograph-header"></section>
       <section class="photograph-gallery"></section>
+      <section class="photograph-global-like"></section>
     </main>
     <div id="contact_modal" class="hidden">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
+          <p class="contact_photographer_name"></p>
           <img src="assets/icons/close.svg" class="closemodal_button" alt="Croix de fermeture">
         </header>
         <form class="form-body" name="formulaire" action="index.html" method="get" >
@@ -45,7 +47,7 @@
           <span class="form-alert" id="message-mail"></span>
           <div class="form-data">
             <label class="message-label" for="message">Votre message</label><br>
-            <input class="text-control" type="text" id="message" name="message"><br>
+            <textarea class="text-control" id="message" name="message" rows="4" cols="50"></textarea></textarea>
           </div>
           <span class="form-alert" id="message-error"></span>
 

@@ -1,6 +1,6 @@
 import { fetchPhotographersData } from '../api/photographerData.js';
 import { PhotographerInfo } from '../class/photoinfo.js';
-import { Media } from '../class/mediaclass.js';
+import { MediasFactory } from '../class/mediaclass.js';
 import {displayModal, closeModal } from '../helpers/contactForm.js';
 
 // Recupération de l'Id transmise par  l'url
@@ -33,6 +33,22 @@ async function displayPhotographerProfile() {
             <img class="photograph_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">
         </div>
         `
+        // Ajouter le nom du photographe dans le formulaire
+        const contactPhotoName = document.querySelector(".contact_photographer_name");
+        contactPhotoName.textContent = photographer.name;
+
+        // Afficher le prix et le nombre de like du photographe
+        const photographerLikesContainer = document.querySelector(".photograph-global-like");
+        const likesAndPrice =
+            `<aside class="photographer_counter" aria-label="footer" role="contentinfo"> 
+                <p class=likes_container>
+                    <span class="likes_counter">666</span>
+                    <i class="fas fa-heart"></i>
+                </p>
+                <span class="price_counter">${photographer.price} € / jour</span>
+            </aside>
+            `
+        photographerLikesContainer.innerHTML = likesAndPrice;
         // Appel de la fonction pour récupérer des données du photographe 
         photographerProfilContainer.innerHTML = PhotogInfoToDisplay;
     }
@@ -40,7 +56,7 @@ async function displayPhotographerProfile() {
 
 async function displayPhotographerMedia() {
     const mediaData = await fetchPhotographersData();  
-    const medias = mediaData.media.map(media => new Media(media));
+    const medias = mediaData.media.map(media => new MediasFactory(media));
     const photographerMedias = medias.filter(media => media.imgPhotographerId == photographerId);
 
     // Données à afficher pour le photographe
@@ -69,13 +85,14 @@ async function displayPhotographerMedia() {
                 </figcaption>
             </article>
             `
-    })
-    const mediaToDisplay = mediaContent.join('');
-    photographerMediaContainer.innerHTML = mediaToDisplay;
-    const modalBtn = document.querySelector(".contact_button");
-    modalBtn.addEventListener("click", displayModal);
-    const closeBtn = document.querySelector(".closemodal_button")
-    closeBtn.addEventListener("click", closeModal);
+        })
+        const mediaToDisplay = mediaContent.join('');
+        photographerMediaContainer.innerHTML = mediaToDisplay;
+        const modalBtn = document.querySelector(".contact_button");
+        modalBtn.addEventListener("click", displayModal);
+        const closeBtn = document.querySelector(".closemodal_button")
+        closeBtn.addEventListener("click", closeModal);
+
 }
 }
 
