@@ -1,9 +1,9 @@
-function displayModal() {
+export function displayModal() {
   const modal = document.querySelector("#contact_modal");
 	modal.style.display = "block";
 }
 
-function closeModal() {
+export function closeModal() {
   const modal = document.querySelector("#contact_modal");
   modal.style.display = "none";
 }
@@ -39,9 +39,9 @@ const twoOrMoreRegEx = /.{2,}/;
 
 // ------ Event listener for open and close modal  ------
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modalBtn = document.querySelector(".contact_button");
-  modalBtn.addEventListener("click", displayModal); })
+//document.addEventListener('DOMContentLoaded', () => {
+//  const modalBtn = document.querySelector(".contact_button");
+//  modalBtn.addEventListener("click", displayModal); })
 
 /** All Check informations Function **/
 // This function check that the name and firstname  
@@ -98,8 +98,8 @@ const validationFetch = async () => {
       }
       console.log("Données renvoyée par le formulaire :", submissionForm)
   
-    // Form destination fake URL add for example
-    const url = 'https://OCGameon.com/submit-form';
+    // ADD HERE THE URL FOR THE FORM INFO FETCH
+    const url = '';
 
     // Fetch parameters 
     const requestOptions = {

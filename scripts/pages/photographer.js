@@ -1,6 +1,7 @@
 import { fetchPhotographersData } from '../api/photographerData.js';
 import { PhotographerInfo } from '../class/photoinfo.js';
 import { Media } from '../class/mediaclass.js';
+import {displayModal, closeModal } from '../helpers/contactForm.js';
 
 // Recupération de l'Id transmise par  l'url
 const urlParams = new URLSearchParams(window.location.search);
@@ -70,10 +71,14 @@ async function displayPhotographerMedia() {
             `
     })
     const mediaToDisplay = mediaContent.join('');
-
     photographerMediaContainer.innerHTML = mediaToDisplay;
+    const modalBtn = document.querySelector(".contact_button");
+    modalBtn.addEventListener("click", displayModal);
+    const closeBtn = document.querySelector(".closemodal_button")
+    closeBtn.addEventListener("click", closeModal);
 }
 }
 
 displayPhotographerProfile();
 displayPhotographerMedia();
+
