@@ -17,7 +17,7 @@ async function displayPhotographerProfile() {
     const photographers = photographerData.photographers.map(photographer => new PhotographerInfo(photographer));
     const photographer = selectPhotographerInfo(photographerId, photographers);
     
-    // Données à afficher pour le photographe
+    // Données à afficher pour l'entête des informations du photographe
     if (photographer) {
         const photographerProfilContainer = document.querySelector(".photograph-header");
         const PhotogInfoToDisplay =
@@ -88,14 +88,43 @@ async function displayPhotographerMedia() {
         })
         const mediaToDisplay = mediaContent.join('');
         photographerMediaContainer.innerHTML = mediaToDisplay;
-        const modalBtn = document.querySelector(".contact_button");
-        modalBtn.addEventListener("click", displayModal);
-        const closeBtn = document.querySelector(".closemodal_button")
-        closeBtn.addEventListener("click", closeModal);
+        //const modalBtn = document.querySelector(".contact_button");
+        //modalBtn.addEventListener("click", displayModal);
+        //const closeBtn = document.querySelector(".closemodal_button")
+        //closeBtn.addEventListener("click", closeModal);
+    }
+}
 
+// Fonction qui renvoie une promesse si l'element a été crée
+function waitForElement(selector) {
+    return new Promise(resolve => {
+        function check() {
+            const element = document.querySelector(selector);
+            if (element) {
+                resolve(element);
+            } else {
+                requestAnimationFrame(check);
+            }
+        }
+        check();
+    });
 }
+
+// Fonction qui attends que le bouton soit crée pour utiliser l'event listener
+async function addEventListeners() {
+    const modalBtn = await waitForElement(".contact_button");
+    modalBtn.addEventListener("click", displayModal);
+
+    const closeBtn = await waitForElement(".closemodal_button");
+    closeBtn.addEventListener("click", closeModal);
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    addEventListeners();
+});
 
 displayPhotographerProfile();
 displayPhotographerMedia();
+
+
 

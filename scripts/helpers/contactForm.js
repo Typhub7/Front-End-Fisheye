@@ -75,37 +75,6 @@ tagEmail.addEventListener('change', () => {checkEmail(tagEmail.value);});
 tagMessage.addEventListener('change', () => {checkMessageSize(tagMessage.value);});
 
 
-const validationFetch = async () => {
-    // Adding form info object
-    const submissionForm = { 
-      fistName : tagFirst.value,
-      lastName : tagLast.value,
-      email : tagEmail.value,
-      message : tagMessage.value
-      }
-      console.log("Données renvoyée par le formulaire :", submissionForm)
-  
-    // ADD HERE THE URL FOR THE FORM INFO FETCH
-    //const url = '';
-
-    // Fetch parameters 
-    //const requestOptions = {
-    //  method: 'POST',
-    //  headers: {'Content-Type': 'application/json'},
-    //  body: JSON.stringify(submissionForm)
-    //};
-
-    //const response = await fetch(url, requestOptions)
-
-    //if (response.ok) {
-      form.reset()        // If Ok, Clean the form au lieu de formBody
-    //  console.log('Réponse du serveur :', response)
-     // return response.json(); // If answer is ok, response can be add here         } else {    
-    //} else {
-    //  throw new Error('Échec de la requête');
-    //} 
-}
-
 function submitAndFetch(event) {
   event.preventDefault()
   
@@ -123,8 +92,13 @@ function submitAndFetch(event) {
     }
     console.log("Formulaire correctement rempli")
  
-    validationFetch()
-    console.log("ValidationFetch OK")
+    const submissionForm = { 
+      fistName : tagFirst.value,
+      lastName : tagLast.value,
+      email : tagEmail.value,
+      message : tagMessage.value
+      }
+      console.log("Données renvoyée par le formulaire :", submissionForm)
     form.reset();     // Remove It when validation fetch will be ok
     closeModal();
     console.log("close Modal Ok")
