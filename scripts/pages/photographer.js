@@ -42,7 +42,7 @@ async function displayPhotographerProfile() {
         const likesAndPrice =
             `<aside class="photographer_counter" aria-label="footer" role="contentinfo"> 
                 <p class=likes_container>
-                    <span class="likes_counter">666</span>
+                    <span class="likes_counter">0</span>
                     <i class="fas fa-heart"></i>
                 </p>
                 <span class="price_counter">${photographer.price} € / jour</span>
@@ -53,12 +53,16 @@ async function displayPhotographerProfile() {
         photographerProfilContainer.innerHTML = PhotogInfoToDisplay;
     }
 }
+let initialLikeCount = 0
 
 async function displayPhotographerMedia() {
     const mediaData = await fetchPhotographersData();  
     const medias = mediaData.media.map(media => new MediasFactory(media));
     const photographerMedias = medias.filter(media => media.imgPhotographerId == photographerId);
 
+    // Calculer la somme totale des likes des médias du photographe
+    initialLikeCount = photographerMedias.reduce((total, photographerMedias) => total + photographerMedias.likes, 0);
+   
     // Données à afficher pour le photographe
     if (photographerMedias) {
         const photographerMediaContainer = document.querySelector(".photograph-gallery");
@@ -76,10 +80,11 @@ async function displayPhotographerMedia() {
                 </a>
                 <figcaption>
                     <h2>${media.title}</h2>
-                        <div role="group" aria-label="Like button and number of likes">
+                        <div class="number-heart" role="group" aria-label="Like button and number of likes">
                             <span class="numberLike">${media.likes}</span> 
                             <button class="btn_like" type="button" aria-label="Like" data-id="${media.id}">
-                                <span class="fas fa-heart" aria-hidden="true"></span>
+                                <i class="fa-regular fa-heart heart-empty" aria-hidden="true"></i>
+                                <i class="fa-solid fa-heart heart-full" aria-hidden="true"></i>
                             </button> 
                         </div>
                 </figcaption>
@@ -88,40 +93,104 @@ async function displayPhotographerMedia() {
         })
         const mediaToDisplay = mediaContent.join('');
         photographerMediaContainer.innerHTML = mediaToDisplay;
-        //const modalBtn = document.querySelector(".contact_button");
-        //modalBtn.addEventListener("click", displayModal);
-        //const closeBtn = document.querySelector(".closemodal_button")
-        //closeBtn.addEventListener("click", closeModal);
+        updateLikesDisplay(initialLikeCount);
     }
 }
 
-// Fonction qui renvoie une promesse si l'element a été crée
+
+// Ajoutez un gestionnaire d'événements de clic à chaque bouton
+let likeCount = initialLikeCount;
+console.log("initialLikeCount",initialLikeCount)
+function toggleHeart (event) {
+
+    // Cibler les éléments d'icônes à l'intérieur du bouton
+    const button = event.currentTarget;
+    const heartEmpty = button.querySelector(".heart-empty");
+    const heartFull = button.querySelector(".heart-full");
+    console.log("heartEmpty",heartEmpty)
+    console.log("heartFull",heartFull)
+
+    // Basculer l'opacité des icônes pour afficher/cacher le cœur plein et le cœur vide
+    if (heartEmpty.style.opacity === "1") {
+        likeCount++;
+        updateLikesDisplay(likeCount);
+        heartEmpty.style.opacity = "0";
+        heartFull.style.opacity = "1";
+    } else {
+        likeCount--;
+        updateLikesDisplay(likeCount);
+        heartEmpty.style.opacity = "1";
+        heartFull.style.opacity = "0";
+    }
+}
+// function de mise à jour de l'affichage du nombre de likes
+async function updateLikesDisplay(newLikeValue) {
+    const likesCounter = await waitForElement(".likes_counter");
+    likesCounter.textContent = newLikeValue;
+}
+
+// Fonctions qui renvoient une promesse si l'element a été crée
 function waitForElement(selector) {
     return new Promise(resolve => {
+        let isResolved = false; 
+
         function check() {
+            if (isResolved) {
+                return; 
+            }
+
             const element = document.querySelector(selector);
             if (element) {
+                isResolved = true; // Marquez la résolution comme terminée
                 resolve(element);
             } else {
                 requestAnimationFrame(check);
             }
         }
+
         check();
     });
 }
 
-// Fonction qui attends que le bouton soit crée pour utiliser l'event listener
+function waitForElements(selector) {
+    return new Promise((resolve) => {
+        let isResolved = false; // Variable de contrôle
+
+        function check() {
+            if (isResolved) {
+                return; // Arrêtez la vérification une fois que les éléments ont été résolus
+            }
+
+            const elements = document.querySelectorAll(selector);
+            if (elements.length > 0) {
+                isResolved = true; // Marquez la résolution comme terminée
+                resolve(elements);
+            } else {
+                requestAnimationFrame(check);
+            }
+        }
+
+        check();
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    addEventListeners();
+ });
+
+ // Fonction qui attends que le bouton contact et les coeurs soit crées pour utiliser l'event listener
 async function addEventListeners() {
     const modalBtn = await waitForElement(".contact_button");
     modalBtn.addEventListener("click", displayModal);
 
     const closeBtn = await waitForElement(".closemodal_button");
-    closeBtn.addEventListener("click", closeModal);
-}
+    closeBtn.addEventListener("click", closeModal); 
 
-document.addEventListener("DOMContentLoaded", function() {
-    addEventListeners();
-});
+    const likeButtons = await waitForElements(".btn_like"); // Utilisez une fonction pour attendre tous les éléments
+    likeButtons.forEach((button) => {
+        button.addEventListener("click", toggleHeart);
+    });
+}
 
 displayPhotographerProfile();
 displayPhotographerMedia();

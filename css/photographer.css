@@ -54,6 +54,11 @@
     cursor: pointer;
 }
 
+.contact_button:hover{
+    background-color: #DB8876;
+
+}
+
 .photograph-gallery {
     display: flex;
     justify-content: flex-start;
@@ -90,6 +95,8 @@
 .btn_like { 
     background-color: transparent;
     border: none;
+    width: 1.5rem;
+    position : relative;
 }
 
 .numberLike {
@@ -99,8 +106,29 @@
     font-size: 1.5rem;
 }
 
-.fas {
+.number-heart {
+    display: flex;
+    flex-direction: row;
+
+}
+.btn_like i {
+    position: absolute;
+    top : 5px;
+    left : 1px;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.heart-full {
+    font-size: 1.2rem;
+    color : #901C1C;
+    opacity: 0;
+}
+.heart-empty {
     color: #901C1C;
+    opacity: 1;
     font-size: 1.2rem;
 }
 
