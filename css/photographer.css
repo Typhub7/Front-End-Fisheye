@@ -117,19 +117,21 @@
     left : 1px;
 }
 
+.heart-full {
+    font-size: 1.2rem;
+    color : #901C1C;
+}
+.heart-empty {
+    color: #901C1C;
+    font-size: 1.2rem;
+}
+
 .visible {
     opacity: 1;
 }
 
-.heart-full {
-    font-size: 1.2rem;
-    color : #901C1C;
+.invisible {
     opacity: 0;
-}
-.heart-empty {
-    color: #901C1C;
-    opacity: 1;
-    font-size: 1.2rem;
 }
 
 .photograph-global-like {

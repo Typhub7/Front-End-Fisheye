@@ -62,7 +62,7 @@ async function displayPhotographerMedia() {
 
     // Calculer la somme totale des likes des médias du photographe
     initialLikeCount = photographerMedias.reduce((total, photographerMedias) => total + photographerMedias.likes, 0);
-   
+       
     // Données à afficher pour le photographe
     if (photographerMedias) {
         const photographerMediaContainer = document.querySelector(".photograph-gallery");
@@ -73,7 +73,7 @@ async function displayPhotographerMedia() {
                 : `<video class="gallery_thumbnail" aria-label="${media.alt}">
                     <source src="./assets/images/${photographerId}/${media.video}" type="video/mp4">
                    </video>`;
-        return `
+            return `
             <article class="gallery_card">                           
                 <a href="#" data-media=${media.id} role="link" aria-label="View media large">
                     <figure>${mediaItem}</figure>
@@ -83,8 +83,8 @@ async function displayPhotographerMedia() {
                         <div class="number-heart" role="group" aria-label="Like button and number of likes">
                             <span class="numberLike">${media.likes}</span> 
                             <button class="btn_like" type="button" aria-label="Like" data-id="${media.id}">
-                                <i class="fa-regular fa-heart heart-empty" aria-hidden="true"></i>
-                                <i class="fa-solid fa-heart heart-full" aria-hidden="true"></i>
+                                <i class="fa-regular fa-heart heart-empty visible" aria-hidden="true"></i>
+                                <i class="fa-solid fa-heart heart-full invisible" aria-hidden="true"></i>
                             </button> 
                         </div>
                 </figcaption>
@@ -94,33 +94,35 @@ async function displayPhotographerMedia() {
         const mediaToDisplay = mediaContent.join('');
         photographerMediaContainer.innerHTML = mediaToDisplay;
         updateLikesDisplay(initialLikeCount);
+        return initialLikeCount;     
     }
 }
 
 
 // Ajoutez un gestionnaire d'événements de clic à chaque bouton
-let likeCount = initialLikeCount;
-console.log("initialLikeCount",initialLikeCount)
+
 function toggleHeart (event) {
 
     // Cibler les éléments d'icônes à l'intérieur du bouton
     const button = event.currentTarget;
     const heartEmpty = button.querySelector(".heart-empty");
     const heartFull = button.querySelector(".heart-full");
-    console.log("heartEmpty",heartEmpty)
-    console.log("heartFull",heartFull)
 
     // Basculer l'opacité des icônes pour afficher/cacher le cœur plein et le cœur vide
-    if (heartEmpty.style.opacity === "1") {
+    if (heartEmpty.classList.contains("visible")) {
         likeCount++;
         updateLikesDisplay(likeCount);
-        heartEmpty.style.opacity = "0";
-        heartFull.style.opacity = "1";
+        heartEmpty.classList.remove("visible");
+        heartEmpty.classList.add("invisible");
+        heartFull.classList.remove("invisible");
+        heartFull.classList.add("visible");       
     } else {
         likeCount--;
         updateLikesDisplay(likeCount);
-        heartEmpty.style.opacity = "1";
-        heartFull.style.opacity = "0";
+        heartFull.classList.remove("visible");
+        heartFull.classList.add("invisible");
+        heartEmpty.classList.remove("invisible");
+        heartEmpty.classList.add("visible");   
     }
 }
 // function de mise à jour de l'affichage du nombre de likes
@@ -147,7 +149,6 @@ function waitForElement(selector) {
                 requestAnimationFrame(check);
             }
         }
-
         check();
     });
 }
@@ -193,7 +194,9 @@ async function addEventListeners() {
 }
 
 displayPhotographerProfile();
-displayPhotographerMedia();
+//displayPhotographerMedia();
+let likeCount = await displayPhotographerMedia();
+
 
 
 
