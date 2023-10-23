@@ -2,6 +2,7 @@ import { fetchPhotographersData } from '../api/photographerData.js';
 import { PhotographerInfo } from '../class/photoinfo.js';
 import { MediasFactory } from '../class/mediaclass.js';
 import {displayModal, closeModal } from '../helpers/contactForm.js';
+import {sortImages} from '../helpers/sort.js';
 
 // Recupération de l'Id transmise par  l'url
 const urlParams = new URLSearchParams(window.location.search);
@@ -62,7 +63,6 @@ async function displayPhotographerMedia() {
 
     // Calculer la somme totale des likes des médias du photographe
     initialGlobalLikeCount = photographerMedias.reduce((total, photographerMedias) => total + photographerMedias.likes, 0);
-    //initialIndivCount = ${media.likes};
     
     // Données à afficher pour le photographe
     if (photographerMedias) {
@@ -207,6 +207,11 @@ async function addEventListeners() {
             likeCounters[mediaId] = parseInt(likeInitialCounterDOM.textContent , 10);
             toggleHeart(event, likeCounters, mediaId, likeInitialCounterDOM);
         });
+    });
+    const selectElement = document.getElementById("selection");
+    selectElement.addEventListener("change", (event) => {
+        const selectedOption = event.target.value;
+        sortImages(selectedOption);
     });
 }
 

@@ -1,6 +1,7 @@
 // Fonction pour trier les images en fonction de l'option sélectionnée
-function sortImages(option) {
-    const gallery = document.getElementById("photograph-gallery");
+export function sortImages(option) {
+    const gallery = document.querySelector("photograph-gallery-container");
+    console.log("gallery",gallery)
     const images = Array.from(gallery.getElementsByClassName("gallery_card"));
 
     images.sort((a, b) => {
@@ -21,9 +22,3 @@ function sortImages(option) {
     images.forEach(image => gallery.appendChild(image));
 }
 
-// Écoutez l'événement change de l'élément select
-const selectElement = document.getElementById("selection");
-selectElement.addEventListener("change", (event) => {
-    const selectedOption = event.target.value;
-    sortImages(selectedOption);
-});
