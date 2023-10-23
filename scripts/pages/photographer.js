@@ -66,7 +66,7 @@ async function displayPhotographerMedia() {
     
     // Données à afficher pour le photographe
     if (photographerMedias) {
-        const photographerMediaContainer = document.querySelector(".photograph-gallery");
+        const photographerMediaContainer = document.querySelector(".photograph-gallery-container");
 
         const mediaContent = photographerMedias.map(media => {
             const mediaItem = media.image
@@ -108,13 +108,11 @@ function toggleHeart (event, likeCounters, mediaId, likeInitialCounterDOM) {
     const button = event.currentTarget;
     const heartEmpty = button.querySelector(".heart-empty");
     const heartFull = button.querySelector(".heart-full");
-    console.log("likeCounters",likeCounters)
 
     // Basculer l'opacité des icônes pour afficher/cacher le cœur plein et le cœur vide
     if (heartEmpty.classList.contains("visible")) {
         globalLikeCount++;
         likeCounters[mediaId]++;
-        console.log("likeCounters",likeCounters)
         updateGlobalLikesDisplay(globalLikeCount);
         updateIndivLikesDisplay(likeCounters[mediaId], likeInitialCounterDOM);
         heartEmpty.classList.remove("visible");
@@ -126,14 +124,13 @@ function toggleHeart (event, likeCounters, mediaId, likeInitialCounterDOM) {
         likeCounters[mediaId]--;
         updateGlobalLikesDisplay(globalLikeCount);
         updateIndivLikesDisplay(likeCounters[mediaId], likeInitialCounterDOM);
-
         heartFull.classList.remove("visible");
         heartFull.classList.add("invisible");
         heartEmpty.classList.remove("invisible");
         heartEmpty.classList.add("visible");   
     }
 }
-// function de mise à jour de l'affichage du nombre de likes
+// fonctions de mise à jour de l'affichage du nombre de likes
 async function updateGlobalLikesDisplay(newGlobalLike) {
     const likesCounter = await waitForElement(".likes_counter");
     likesCounter.textContent = newGlobalLike;
@@ -207,17 +204,13 @@ async function addEventListeners() {
             const button = event.currentTarget;
             const mediaId = button.getAttribute("data-id");
             const likeInitialCounterDOM = button.closest(".gallery_card").querySelector(".numberLike")
-            const likeInitialCounter = likeInitialCounterDOM.textContent;
-            likeCounters[mediaId] = parseInt(likeInitialCounter , 10);
-            console.log("mediaId",mediaId)
-            console.log("likeInitialCounter",likeInitialCounter)
+            likeCounters[mediaId] = parseInt(likeInitialCounterDOM.textContent , 10);
             toggleHeart(event, likeCounters, mediaId, likeInitialCounterDOM);
         });
     });
 }
 
 displayPhotographerProfile();
-//displayPhotographerMedia();
 let globalLikeCount = await displayPhotographerMedia();
 
 

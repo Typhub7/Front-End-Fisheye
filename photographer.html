@@ -19,7 +19,19 @@
     
     <main id="main">
       <section class="photograph-header"></section>
-      <section class="photograph-gallery"></section>
+      <section class="photograph-gallery">
+        <div class="photograph-gallery-filter"> 
+          <label class= "dropbox" for="selection"  >Trier par</label>
+          <select  class="btn-select" name="select" id="selection"  aria-label="trier par" >
+              <option tabindex="0" class="option" value="popularite" aria-current="page">Popularité</option>
+              <option disabled>──────────</option>
+              <option tabindex="0"  class="option" value="date">Date</option>
+              <option disabled>──────────</option>
+              <option tabindex="0" class="option" value="titre">Titre</option>
+          </select>
+        </div>
+        <div class="photograph-gallery-container"></div>
+      </section>
       <section class="photograph-global-like"></section>
     </main>
     <div id="contact_modal" class="hidden">
