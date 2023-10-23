@@ -2,7 +2,6 @@ import { fetchPhotographersData } from '../api/photographerData.js';
 import { PhotographerInfo } from '../class/photoinfo.js';
 import { MediasFactory } from '../class/mediaclass.js';
 import {displayModal, closeModal } from '../helpers/contactForm.js';
-import {sortImages} from '../helpers/sort.js';
 
 // Recupération de l'Id transmise par  l'url
 const urlParams = new URLSearchParams(window.location.search);
@@ -54,20 +53,35 @@ async function displayPhotographerProfile() {
         photographerProfilContainer.innerHTML = PhotogInfoToDisplay;
     }
 }
+
 let initialGlobalLikeCount = 0
+let photographerMedias = {}
 
-async function displayPhotographerMedia() {
-    const mediaData = await fetchPhotographersData();  
-    const medias = mediaData.media.map(media => new MediasFactory(media));
-    const photographerMedias = medias.filter(media => media.imgPhotographerId == photographerId);
-
+async function displayPhotographerMedia(selectedOption) {
+    const photographerMediaContainer = document.querySelector(".photograph-gallery-container");
+    if (Object.keys(photographerMedias).length === 0) {
+        const mediaData = await fetchPhotographersData(); 
+        const medias = mediaData.media.map(media => new MediasFactory(media));
+        photographerMedias = medias.filter(media => media.imgPhotographerId == photographerId);
+    } else {
+        photographerMediaContainer.innerHTML = ""
+        if (selectedOption === "popularite") {
+            photographerMedias.sort((a,b) => b.likes - a.likes);    
+        } else if (selectedOption === "date") {
+            photographerMedias.sort((a, b) => {
+                const dateA = new Date(a.date.split('-'));
+                const dateB = new Date(b.date.split('-'));
+                return dateB - dateA;
+            });
+        } else if (selectedOption === "titre") {
+            photographerMedias.sort((a, b) => a.title.localeCompare(b.title));
+        } 
+    }
     // Calculer la somme totale des likes des médias du photographe
     initialGlobalLikeCount = photographerMedias.reduce((total, photographerMedias) => total + photographerMedias.likes, 0);
-    
+  
     // Données à afficher pour le photographe
     if (photographerMedias) {
-        const photographerMediaContainer = document.querySelector(".photograph-gallery-container");
-
         const mediaContent = photographerMedias.map(media => {
             const mediaItem = media.image
                 ? `<img class="gallery_thumbnail" src="./assets/images/${photographerId}/${media.image}" alt="${media.alt}">`
@@ -94,6 +108,17 @@ async function displayPhotographerMedia() {
         })
         const mediaToDisplay = mediaContent.join('');
         photographerMediaContainer.innerHTML = mediaToDisplay;
+
+        const likeButtons = await waitForElements(".btn_like"); // Utilisez une fonction pour attendre tous les éléments
+        likeButtons.forEach((button) => {
+            button.addEventListener("click", (event) => {
+                const button = event.currentTarget;
+                const mediaId = button.getAttribute("data-id");
+                const likeInitialCounterDOM = button.closest(".gallery_card").querySelector(".numberLike")
+                likeCounters[mediaId] = parseInt(likeInitialCounterDOM.textContent , 10);
+                toggleHeart(event, likeCounters, mediaId, likeInitialCounterDOM);
+            });
+        });
         updateGlobalLikesDisplay(initialGlobalLikeCount);
         return initialGlobalLikeCount;     
     }
@@ -198,20 +223,11 @@ async function addEventListeners() {
     const closeBtn = await waitForElement(".closemodal_button");
     closeBtn.addEventListener("click", closeModal); 
 
-    const likeButtons = await waitForElements(".btn_like"); // Utilisez une fonction pour attendre tous les éléments
-    likeButtons.forEach((button) => {
-        button.addEventListener("click", (event) => {
-            const button = event.currentTarget;
-            const mediaId = button.getAttribute("data-id");
-            const likeInitialCounterDOM = button.closest(".gallery_card").querySelector(".numberLike")
-            likeCounters[mediaId] = parseInt(likeInitialCounterDOM.textContent , 10);
-            toggleHeart(event, likeCounters, mediaId, likeInitialCounterDOM);
-        });
-    });
+    //Gestion des filtres : 
     const selectElement = document.getElementById("selection");
     selectElement.addEventListener("change", (event) => {
         const selectedOption = event.target.value;
-        sortImages(selectedOption);
+        displayPhotographerMedia(selectedOption);
     });
 }
 
