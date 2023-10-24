@@ -9,12 +9,14 @@
     padding: 40px;
     flex-wrap: wrap;
 }
+
 .photograph_name {
     font-size: 4rem;
     font-weight: 400;
     line-height: 3.5rem;
     color : #D3573C;
 }
+
 .photograph_citycountry {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -25,7 +27,7 @@
     font-size: 1.12rem;
     line-height: 1.5rem;
     color: #525252;
-  }
+}
 
 .photograph_details {
     display: flex;
@@ -34,12 +36,12 @@
 }
  
 .photograph_picture {
-    height: 12.5rem;
-    width: 12.5rem;
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
     object-position: 80% 10%;
     object-fit: cover;
-  }
+}
 
 .contact_button {
     font-size: 20px;
@@ -67,35 +69,30 @@
 
 /* photographer Sort filter CSS */
 .photograph-gallery-filter {
-    width: 22.5rem;
-  }
+    width: 360px;
+}
   
 .dropbox {
-width: 4.62rem;
-height: 1.43rem;
+width: 75px;
+height: 24px;
 line-height: 1.5rem;
 font-family: DM Sans;
 font-style: normal;
 font-weight: bold;
-font-size: 1.12rem;
+font-size: 1.125rem;
 color: #000000;
 }
 
 .btn-select {
 background-color: #901c1c;
 border-color: transparent;
-border-radius: 0.31rem;
+border-radius: 5px;
 color: white;
-font-size: 1.12rem;
+font-size: 1.125rem;
 padding: 10px;
 width: 170px;
 height: 69px;
-filter: drop-shadow(0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
-}
-
-option {
-    height: 4.31rem;
-    padding: 10px;
+filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
 }
 
 /* Gallery CSS */
@@ -115,6 +112,7 @@ option {
   object-fit: cover;
   object-position: center;
 }
+
 .gallery_card figcaption {
     width: 350px;
     display: flex;
@@ -147,7 +145,6 @@ option {
 .number-heart {
     display: flex;
     flex-direction: row;
-
 }
 .btn_like i {
     position: absolute;
@@ -182,8 +179,7 @@ option {
     width: 376px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    
+    justify-content: center;  
 }
 
 .photographer_counter {

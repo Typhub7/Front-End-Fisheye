@@ -2,6 +2,7 @@ import { fetchPhotographersData } from '../api/photographerData.js';
 import { PhotographerInfo } from '../class/photoinfo.js';
 import { MediasFactory } from '../class/mediaclass.js';
 import {displayModal, closeModal } from '../helpers/contactForm.js';
+import {displayLightbox} from '../helpers/lightbox.js'
 
 // Recupération de l'Id transmise par  l'url
 const urlParams = new URLSearchParams(window.location.search);
@@ -119,6 +120,8 @@ async function displayPhotographerMedia(selectedOption) {
                 toggleHeart(event, likeCounters, mediaId, likeInitialCounterDOM);
             });
         });
+        displayLightbox(photographerMediaContainer,photographerMedias)
+ 
         updateGlobalLikesDisplay(initialGlobalLikeCount);
         return initialGlobalLikeCount;     
     }
@@ -140,19 +143,15 @@ function toggleHeart (event, likeCounters, mediaId, likeInitialCounterDOM) {
         likeCounters[mediaId]++;
         updateGlobalLikesDisplay(globalLikeCount);
         updateIndivLikesDisplay(likeCounters[mediaId], likeInitialCounterDOM);
-        heartEmpty.classList.remove("visible");
-        heartEmpty.classList.add("invisible");
-        heartFull.classList.remove("invisible");
-        heartFull.classList.add("visible");       
+        heartEmpty.classList.replace("visible", "invisible");
+        heartFull.classList.replace("invisible", "visible");    
     } else {
         globalLikeCount--;
         likeCounters[mediaId]--;
         updateGlobalLikesDisplay(globalLikeCount);
         updateIndivLikesDisplay(likeCounters[mediaId], likeInitialCounterDOM);
-        heartFull.classList.remove("visible");
-        heartFull.classList.add("invisible");
-        heartEmpty.classList.remove("invisible");
-        heartEmpty.classList.add("visible");   
+        heartFull.classList.replace("visible", "invisible");
+        heartEmpty.classList.replace("invisible", "visible");   
     }
 }
 // fonctions de mise à jour de l'affichage du nombre de likes
@@ -213,8 +212,6 @@ document.addEventListener("DOMContentLoaded", function() {
     addEventListeners();
  });
 
-
-
  // Fonction qui attends que le bouton contact et les coeurs soit crées pour utiliser l'event listener
 async function addEventListeners() {
     const modalBtn = await waitForElement(".contact_button");
@@ -233,7 +230,3 @@ async function addEventListeners() {
 
 displayPhotographerProfile();
 let globalLikeCount = await displayPhotographerMedia();
-
-
-
-
