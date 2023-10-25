@@ -120,7 +120,7 @@ async function displayPhotographerMedia(selectedOption) {
                 toggleHeart(event, likeCounters, mediaId, likeInitialCounterDOM);
             });
         });
-        displayLightbox(photographerMediaContainer,photographerMedias)
+        displayLightbox(photographerMediaContainer,photographerMedias,photographerId)
  
         updateGlobalLikesDisplay(initialGlobalLikeCount);
         return initialGlobalLikeCount;     

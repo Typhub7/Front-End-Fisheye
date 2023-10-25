@@ -1,12 +1,29 @@
-.lightbox {
-    /*display: none;*/
+.lightbox-container {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background : rgba(0, 0, 0, 0.55);
+    padding: 25px 60px 0;
+    border-radius: 5px;
     z-index: 15;
+}
+
+.lightbox {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    height: 90%;
+    max-height: 1000px;
+    background-color: white;
+    padding: 25px 20px 0;
+    border-radius: 5px;
+    margin: auto;
 }
 
 .lightbox-next,
@@ -15,10 +32,11 @@
     font-size : 6rem;
     font-weight: bold;
     border : none;
-    background-color: white; /* Définit la couleur de fond en rouge */
-    padding: 10px 20px;
+    background-color: white;
+    padding: 5px;
     cursor: pointer;
 }
+
 
 .close-lightbox {
     position: relative;
@@ -26,5 +44,19 @@
     cursor: pointer;
     font-size : 8rem;
     font-weight: bold;
+}
+
+.lightbox-image {
+    max-width: 90%; 
+    max-height: 80vh; 
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.close-lightbox {
+    position: absolute;
+    top : -40px;
+    right : 15px;
 }
 

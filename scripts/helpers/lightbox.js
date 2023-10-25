@@ -1,17 +1,16 @@
-export function displayLightbox (photographerMediaContainer,photographerMedias) {
+export function displayLightbox (photographerMediaContainer,photographerMedias,photographerId ) {
     // Variables
     console.log("photographerMediaContainer",photographerMediaContainer)
     console.log("photographerMedias",photographerMedias)
-    const lightbox = document.querySelector('.lightbox');
+    const lightbox = document.querySelector('.lightbox-container');
     const lightboxImage = document.getElementById('lightbox-image');
     const closeLightboxButton = document.getElementById('close-lightbox');
     const prevButton = document.getElementById('lightbox-prev');
     const nextButton = document.getElementById('lightbox-next');
     let currentMediaIndex = 0;
  
-
     // Fonction pour ouvrir la lightbox
-     function openLightbox(index) {
+    function openLightbox(index) {
         lightbox.style.display = 'block';
         currentMediaIndex = index;
         const media = photographerMedias[currentMediaIndex];
@@ -42,13 +41,17 @@ export function displayLightbox (photographerMediaContainer,photographerMedias) 
     }
     // Gestion de l'evenement de l'ouverture de la lightbox
     photographerMediaContainer.addEventListener('click', (event) => {
+        console.log("event.target.classList", event.target.classList);
         if (event.target.classList.contains('gallery_thumbnail')) {
-            const index = photographerMedias.findIndex(media => media.id === event.target.dataset.media);
+            const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
+            console.log("photographerMedias4", photographerMedias);
+            console.log("event.target.closest('a').dataset.media", event.target.closest('a').dataset.media);
+            console.log("Image clicked. Index:", index);
             if (index !== -1) {
                 openLightbox(index);
             }
         }
-        });
+    });
 
     closeLightboxButton.addEventListener('click', closeLightbox);
     prevButton.addEventListener('click', showPrevImage);
