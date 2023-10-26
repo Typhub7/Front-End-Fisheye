@@ -13,7 +13,7 @@
   <body>
     <header>
       <a href="index.html"> 
-        <img src="assets/images/logo.png" class="logo" alt="fisheye logo"/>
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" aria-label="Go back to Fisheye Home Page" role="link"/>
       </a>
     </header>
     
@@ -21,7 +21,7 @@
       <section class="photograph-header"></section>
       <section class="photograph-gallery">
         <div class="photograph-gallery-filter"> 
-          <label class= "dropbox" for="selection"  >Trier par</label>
+          <label class= "dropdown" for="selection">Trier par</label>
           <select  class="btn-select" name="select" id="selection"  aria-label="trier par" >
               <option tabindex="0" class="option" value="popularite" aria-current="page">Popularité</option>
               <option disabled>──────────</option>
@@ -34,48 +34,50 @@
       </section>
       <section class="photograph-global-like"></section>
     </main>
-    <div id="contact_modal" class="hidden">
-			<div class="modal">
+    <div id="contact_modal" class="hidden" role="dialog" tabindex="0" >
+			<div class="modal" aria-describedby="contactezmoi">
 				<header>
-          <h2>Contactez-moi</h2>
+          <h2 id="contactezmoi">Contactez-moi</h2>
           <p class="contact_photographer_name"></p>
-          <img src="assets/icons/close.svg" class="closemodal_button" alt="Croix de fermeture">
+          <button class="closemodal_button">
+            <img src="assets/icons/close.svg" class="closemodal_icon" alt="Close Modal icon" aria-label="Close modal">
+          </button>
         </header>
         <form class="form-body" name="formulaire" action="index.html" method="get" >
           <div class="form-data">
             <label class="first-label" for="first">Prénom</label>
-            <input class="text-control" type="text" id="first" name="first"><br>
+            <input class="text-control" type="text" id="first" name="first" aria-labelledby="first-label"><br>
           </div>
           <span class="form-alert" id="message-first"></span>
           <div class="form-data">
             <label class="last-label" for="last">Nom</label><br>
-            <input class="text-control" type="text" id="last" name="last"><br>
+            <input class="text-control" type="text" id="last" name="last" aria-labelledby="last-label"><br>
           </div>
           <span class="form-alert" id="message-name"></span>
           <div class="form-data">
             <label class="email-label" for="email">Email</label><br>
-            <input class="text-control" type="email" id="email" name="email"><br>
+            <input class="text-control" type="email" id="email" name="email" aria-labelledby="email-label"><br>
           </div>
           <span class="form-alert" id="message-mail"></span>
           <div class="form-data">
             <label class="message-label" for="message">Votre message</label><br>
-            <textarea class="text-control" id="message" name="message" rows="4" cols="50"></textarea></textarea>
+            <textarea class="text-control" id="message" name="message" rows="4" cols="50" aria-labelledby="message-label"></textarea></textarea>
           </div>
           <span class="form-alert" id="message-error"></span>
-          <input class="submit-button" type="submit" value="Envoyer" id="submitform">
+          <input class="submit-button" type="submit" value="Envoyer" id="submitform" aria-label="Send">
         </form>
 		  </div>
     </div>  
     <div class="lightbox-container">
-      <div class="lightbox">
-          <span class="close-lightbox" id="close-lightbox" alt="Croix de fermeture">&times;</span>
-          <button class="lightbox-prev" id="lightbox-prev">&lt;</button>
+      <div class="lightbox" aria-label="Media full view">
+          <span class="close-lightbox" id="close-lightbox" alt="Close icon" aria-label="Close dialog">&times;</span>
+          <button class="lightbox-prev" id="lightbox-prev"aria-label="Previous media">&lt;</button>
           <div class="lightbox-area">
             <img class="lightbox-image" id="lightbox-image" src="" alt="" aria-label="">
             <video controls class="lightbox-video" id="lightbox-video" src="" alt="" aria-label=""></video>
             <h2 class="lightbox-title" tabindex="0"></h2>
           </div>
-          <button class="lightbox-next" id="lightbox-next">&gt;</button>
+          <button class="lightbox-next" id="lightbox-next" aria-label="Next media">&gt;</button>
 
       </div>
     </div>

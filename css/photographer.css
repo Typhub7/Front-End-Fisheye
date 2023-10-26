@@ -71,28 +71,47 @@
 .photograph-gallery-filter {
     width: 360px;
 }
-  
-.dropbox {
-width: 75px;
-height: 24px;
-line-height: 1.5rem;
-font-family: DM Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 1.125rem;
-color: #000000;
+ 
+.dropdown {
+    width: 75px;
+    height: 24px;
+    line-height: 1.5rem;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.125rem;
+    color: #000000;
 }
 
 .btn-select {
-background-color: #901c1c;
-border-color: transparent;
-border-radius: 5px;
-color: white;
-font-size: 1.125rem;
-padding: 10px;
-width: 170px;
-height: 69px;
-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+    background-color: #901c1c;
+    border-color: transparent;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.125rem;
+    padding: 10px;
+    width: 170px;
+    height: 69px;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+}
+/*
+.btn-select:hover {
+    background-color: #DB8876;
+}
+
+.btn-select.ouvert{
+    background-color: #901c1c;
+}*/
+
+
+
+
+.custom-arrow::after {
+    content: "▼";
+}
+
+.custom-arrow.open::after {
+    content: "▲";
 }
 
 /* Gallery CSS */

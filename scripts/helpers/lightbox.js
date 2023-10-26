@@ -73,7 +73,11 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
 
     // Fermer la lightbox en appuyant sur la touche "Echap"
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
+        if (event.key === 'ArrowLeft') {
+            showPrevImage();
+        } else if (event.key === 'ArrowRight') {
+            showNextImage();
+        } else if (event.key === 'Escape') {
             closeLightbox();
         }
     });

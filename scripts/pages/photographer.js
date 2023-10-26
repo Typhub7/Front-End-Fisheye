@@ -215,13 +215,20 @@ document.addEventListener("DOMContentLoaded", function() {
  // Fonction qui attends que le bouton contact et les coeurs soit crées pour utiliser l'event listener
 async function addEventListeners() {
     const modalBtn = await waitForElement(".contact_button");
-    modalBtn.addEventListener("click", displayModal);
+    modalBtn.addEventListener("click", () => {
+        desactiverNavigationArrierePlan();
+        displayModal();
+    });
 
     const closeBtn = await waitForElement(".closemodal_button");
     closeBtn.addEventListener("click", closeModal); 
 
     //Gestion des filtres : 
     const selectElement = document.getElementById("selection");
+    selectElement.addEventListener("click", (event) => {
+        selectElement.classList.add('ouvert');
+    });
+
     selectElement.addEventListener("change", (event) => {
         const selectedOption = event.target.value;
         displayPhotographerMedia(selectedOption);
@@ -230,3 +237,24 @@ async function addEventListeners() {
 
 displayPhotographerProfile();
 let globalLikeCount = await displayPhotographerMedia();
+
+// Fonction d'accessibilité activer/desactiver la navigation en arrière plan
+function desactiverNavigationArrierePlan() {
+    const ElementsMain = document.querySelectorAll('main');
+    ElementsMain.forEach(element => {
+        const tabindexValue = element.getAttribute('tabindex');
+        if (tabindexValue === '0') {
+            element.setAttribute('tabindex', '-1');
+        }
+    });
+}
+
+function activerNavigationArrierePlan() {
+    const ElementsMain = document.querySelectorAll('main');
+    ElementsMain.forEach(element => {
+        const tabindexValue = element.getAttribute('tabindex');
+        if (tabindexValue === '-1') {
+            element.setAttribute('tabindex', '0');
+        }
+    });
+}

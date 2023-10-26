@@ -12,7 +12,6 @@
 
 a {
 	text-decoration: none;
-	color: inherit;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -48,9 +47,13 @@ h3 {
     font-weight: 400; 
 }
 
+.logo-container {
+    position : relative;
+    left : 100px;
+}
+
 .logo {
     height: 50px;
-    margin-left: 100px;
 }
 
 .photographer_section {
