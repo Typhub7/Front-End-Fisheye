@@ -175,11 +175,12 @@ filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
     left: 100%;
     background-color: #DB8876;
     border-radius: 5px; 
-    height: 89px;
+    height: 65px;
     width: 376px;
     display: flex;
     align-items: center;
-    justify-content: center;  
+    justify-content: center;
+    z-index : 5;
 }
 
 .photographer_counter {

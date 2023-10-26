@@ -23,14 +23,14 @@ let errorDetected = false
 const formErrors = { shortName : "Il faut au minimum 2 charactères.",
                    badName : "Un caractère n'est pas reconnu. Merci de corriger.",
                    badEmail : "Veuillez renseigner une adresse mail valide.",
-                   badSize : "Votre message doit contenir entre 10 et 300 caractères.",
+                   badSize : "Entre 10 et 300 caractères et pas de charactères spéciaux."
 }  
                    
 // ------ Regular Expression RegEx ------
 const nameFirstRegEx = new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$") 
 const emailRegEx = new RegExp("^[a-zA-Z0-9._-]{2,}@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$")
 const twoOrMoreRegEx = /.{2,}/;
-const messageSize = /^(.|\n){10,300}$/;
+const messageSize = /^[a-zA-Z0-9\s.,!?-]{10,300}$/;
 
 /** All Check informations Function **/
 // This function check that the name and firstname  

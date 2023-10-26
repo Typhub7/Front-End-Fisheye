@@ -1,12 +1,12 @@
 export function displayLightbox (photographerMediaContainer,photographerMedias,photographerId ) {
-    // Variables
-    console.log("photographerMediaContainer",photographerMediaContainer)
-    console.log("photographerMedias",photographerMedias)
+    // Elements du DOM et Variables
     const lightbox = document.querySelector('.lightbox-container');
     const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxVideo = document.getElementById('lightbox-video');
     const closeLightboxButton = document.getElementById('close-lightbox');
     const prevButton = document.getElementById('lightbox-prev');
     const nextButton = document.getElementById('lightbox-next');
+    const lightboxTitle = document.querySelector('.lightbox-title');
     let currentMediaIndex = 0;
  
     // Fonction pour ouvrir la lightbox
@@ -14,9 +14,19 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         lightbox.style.display = 'block';
         currentMediaIndex = index;
         const media = photographerMedias[currentMediaIndex];
-        lightboxImage.src = `./assets/images/${photographerId}/${media.image}`;
-        lightboxImage.alt = media.alt;
-        lightbox.style.display = 'block';
+        
+        if (media.image) {
+            lightboxVideo.style.display = 'none';
+            lightboxImage.style.display = 'block';
+            lightboxImage.src = `./assets/images/${photographerId}/${media.image}`;
+            lightboxImage.alt = media.alt;
+            lightboxTitle.innerText = `${media.title}`;
+        } else if (media.video) {
+            lightboxVideo.src = `./assets/images/${photographerId}/${media.video}`;
+            lightboxImage.style.display = 'none';
+            lightboxVideo.style.display = 'block';
+            lightboxTitle.innerText = `${media.title}`;
+        }   
     }
 
     // Fonction pour fermer la lightbox
@@ -29,6 +39,10 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         if (currentMediaIndex > 0) {
             currentMediaIndex--;
             openLightbox(currentMediaIndex);
+        } else {
+            // Si c'est la première image, passez à la dernière
+            currentMediaIndex = photographerMedias.length - 1;
+            openLightbox(currentMediaIndex);
         }
     }
 
@@ -37,16 +51,16 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         if (currentMediaIndex < photographerMedias.length - 1) {
             currentMediaIndex++;
             openLightbox(currentMediaIndex);
+        } else {
+            // Si c'est la dernière image, revenez à la première
+            currentMediaIndex = 0;
+            openLightbox(currentMediaIndex);
         }
     }
     // Gestion de l'evenement de l'ouverture de la lightbox
     photographerMediaContainer.addEventListener('click', (event) => {
-        console.log("event.target.classList", event.target.classList);
         if (event.target.classList.contains('gallery_thumbnail')) {
             const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
-            console.log("photographerMedias4", photographerMedias);
-            console.log("event.target.closest('a').dataset.media", event.target.closest('a').dataset.media);
-            console.log("Image clicked. Index:", index);
             if (index !== -1) {
                 openLightbox(index);
             }

@@ -17,11 +17,11 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1000px;
-    height: 90%;
-    max-height: 1000px;
+    max-width: 1400px;
+    height: 95%;
+    max-height: 1400px;
     background-color: white;
-    padding: 25px 20px 0;
+    padding: 10px 10px 0;
     border-radius: 5px;
     margin: auto;
 }
@@ -45,18 +45,28 @@
     font-size : 8rem;
     font-weight: bold;
 }
-
-.lightbox-image {
-    max-width: 90%; 
-    max-height: 80vh; 
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
 .close-lightbox {
     position: absolute;
     top : -40px;
     right : 15px;
 }
 
+
+.lightbox-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.lightbox-image,
+.lightbox-video {
+    max-height: 80vh; 
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.lightbox-title {
+    margin-top: 5px;   
+    font-size: 1.5rem; 
+    color : #D3573C;
+}
