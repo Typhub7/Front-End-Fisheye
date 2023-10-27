@@ -17,11 +17,11 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1400px;
-    height: 95%;
-    max-height: 1400px;
+    max-width: 1200px;
+    height: 97%;
+    max-height: 1200px;
     background-color: white;
-    padding: 10px 10px 0;
+    padding: 20px 10px 0;
     border-radius: 5px;
     margin: auto;
 }
@@ -48,15 +48,18 @@
 .close-lightbox {
     position: absolute;
     top : -40px;
-    right : 15px;
+    right : 0;
 }
 
 
 .lightbox-area {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
+/* Proposition : Afficher les images en portrait / paysage 
 .lightbox-image,
 .lightbox-video {
     max-height: 80vh; 
@@ -64,7 +67,17 @@
     height: auto;
     object-fit: cover;
     border-radius: 5px;
+} */
+
+/* Affichage conforme à la maquette*/
+.lightbox-image,
+.lightbox-video {
+    width : 100%;
+    height: calc(100% - 30px);
+    object-fit: cover;
+    object-position: center;
 }
+
 
 .lightbox-title {
     margin-top: 5px;   

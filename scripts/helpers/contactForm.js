@@ -1,3 +1,4 @@
+// ----- Contact Form Modal Open/Close -----
 export function displayModal() {
   const modal = document.querySelector("#contact_modal");
 	modal.style.display = "block";
@@ -32,8 +33,8 @@ const emailRegEx = new RegExp("^[a-zA-Z0-9._-]{2,}@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2
 const twoOrMoreRegEx = /.{2,}/;
 const messageSize = /^[a-zA-Z0-9\s.,!?-]{10,300}$/;
 
-/** All Check informations Function **/
-// This function check that the name and firstname  
+// ----- Contact Form Check informations Function -----
+// Name and Firstname control
 function checkName(firstOrName,messageLoc) {
   if (!twoOrMoreRegEx.test(firstOrName)) {
     messageLoc.innerText = formErrors.shortName;
@@ -47,7 +48,7 @@ function checkName(firstOrName,messageLoc) {
   }
 }
 
-// This function Check that email is correct 
+// Email control
 function checkEmail(email) {
     if (!emailRegEx.test(email)) {
       messageMail.innerText = formErrors.badEmail;
@@ -58,6 +59,7 @@ function checkEmail(email) {
   }
 }
 
+// Message size and character control
 function checkMessageSize(message) {
   if (!messageSize.test(message)) {
     messageError.innerText = formErrors.badSize;
@@ -68,13 +70,17 @@ function checkMessageSize(message) {
   }
 }
 
-// Submission control on change event
+// ----- Contact Form Event Listeneer on change -----
 tagFirst.addEventListener('change', () => {checkName(tagFirst.value,messageFirst);});
 tagLast.addEventListener('change', () => {checkName(tagLast.value,messageName);});
 tagEmail.addEventListener('change', () => {checkEmail(tagEmail.value);});
 tagMessage.addEventListener('change', () => {checkMessageSize(tagMessage.value);});
 
 
+/**
+ * Submit the form and retrieve the data using validation functions.
+ * @param {Event} event - Form Submit Event
+ */
 function submitAndFetch(event) {
   event.preventDefault()
   
@@ -109,5 +115,5 @@ function submitAndFetch(event) {
   }
 }
 
-// ------ Submit ------ 
+// ------ Form Submit Event Listeneer ------ 
 form.addEventListener("submit", event => submitAndFetch(event))
