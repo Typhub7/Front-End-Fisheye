@@ -4,14 +4,25 @@ import { MediasFactory } from '../class/mediaclass.js';
 import { displayModal, closeModal } from '../helpers/contactForm.js';
 import { displayLightbox } from '../helpers/lightbox.js'
 
-// Recupération de l'Id transmise par  l'url
+
+// Retrieval of the ID transmitted by the URL..
+
 const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get("id");
 
-// Fonction de réécupération des données du photographe de la page
+
+/** Extract the Data from the choosen photographer using ID.
+ * @param {number} photographerId - The ID of the photographer.
+ * @param {Object[]} photographers - An array of photographer objects.
+ * @returns {Object} The photographer's information.
+ */
+
 function selectPhotographerInfo(photographerId, photographers) {
     return photographers.find(photographer => photographer.id == photographerId);
 }
+
+/** Display the photographer's profile and information.
+ */
 
 async function displayPhotographerProfile() {
     const photographerData = await fetchPhotographersData();
@@ -58,6 +69,10 @@ async function displayPhotographerProfile() {
 let initialGlobalLikeCount = 0
 let photographerMedias = {}
 
+/** Display the photographer's media based on the selected sort option or by default (json order).
+ * @param {string} selectedOption - The selected sorting option ("popularite", "date", "titre").
+ */
+
 async function displayPhotographerMedia(selectedOption) {
     const photographerMediaContainer = document.querySelector(".photograph-gallery-container");
     if (Object.keys(photographerMedias).length === 0) {
@@ -78,10 +93,10 @@ async function displayPhotographerMedia(selectedOption) {
             photographerMedias.sort((a, b) => a.title.localeCompare(b.title));
         } 
     }
-    // Calculer la somme totale des likes des médias du photographe
+    // Calculate the total sum of the photographer's media likes
     initialGlobalLikeCount = photographerMedias.reduce((total, photographerMedias) => total + photographerMedias.likes, 0);
   
-    // Données à afficher pour le photographe
+    // Display the Gallery of the photographer
     if (photographerMedias) {
         const mediaContent = photographerMedias.map(media => {
             const mediaItem = media.image
@@ -110,7 +125,8 @@ async function displayPhotographerMedia(selectedOption) {
         const mediaToDisplay = mediaContent.join('');
         photographerMediaContainer.innerHTML = mediaToDisplay;
 
-        const likeButtons = await waitForElements(".btn_like"); // Utilisez une fonction pour attendre tous les éléments
+        // Event listeneer and heart like counter
+        const likeButtons = await waitForElements(".btn_like");
         likeButtons.forEach((button) => {
             button.addEventListener("click", (event) => {
                 const button = event.currentTarget;
@@ -129,15 +145,19 @@ async function displayPhotographerMedia(selectedOption) {
 
 let likeCounters = {};
 
-// Ajoutez un gestionnaire d'événements de clic à chaque bouton
+/**Toggle the like button and update the like count.
+ * @param {Event} event - The click event.
+ * @param {Object} likeCounters - An object containing the database like counts for each media.
+ * @param {string} mediaId - The ID of the media.
+ * @param {HTMLElement} likeInitialCounterDOM - The DOM element displaying the initial like count.
+ */
+
 function toggleHeart (event, likeCounters, mediaId, likeInitialCounterDOM) {
 
-    // Cibler les éléments d'icônes à l'intérieur du bouton
     const button = event.currentTarget;
     const heartEmpty = button.querySelector(".heart-empty");
     const heartFull = button.querySelector(".heart-full");
 
-    // Basculer l'opacité des icônes pour afficher/cacher le cœur plein et le cœur vide
     if (heartEmpty.classList.contains("visible")) {
         globalLikeCount++;
         likeCounters[mediaId]++;
@@ -154,7 +174,12 @@ function toggleHeart (event, likeCounters, mediaId, likeInitialCounterDOM) {
         heartEmpty.classList.replace("invisible", "visible");   
     }
 }
-// fonctions de mise à jour de l'affichage du nombre de likes
+
+/** Update the display of individual like counts.
+ * @param {number} newIndivLike - The new individual like count.
+ * @param {HTMLElement} likeInitialCounterDOM - The DOM element displaying the initial like count.
+ */
+
 async function updateGlobalLikesDisplay(newGlobalLike) {
     const likesCounter = await waitForElement(".likes_counter");
     likesCounter.textContent = newGlobalLike;
@@ -164,7 +189,11 @@ async function updateIndivLikesDisplay(newIndivLike, likeInitialCounterDOM) {
     likeInitialCounterDOM.textContent = newIndivLike;
 }
 
-// Fonctions qui renvoient une promesse si l'element a été crée
+/** Wait for an HTML element to be created and resolve the promise once it's found.
+ * @param {string} selector - The CSS selector for the element to wait for.
+ * @returns {Promise<HTMLElement>} A promise that resolves to the found element.
+ */
+
 function waitForElement(selector) {
     return new Promise(resolve => {
         let isResolved = false; 
@@ -176,7 +205,7 @@ function waitForElement(selector) {
 
             const element = document.querySelector(selector);
             if (element) {
-                isResolved = true; // Marquez la résolution comme terminée
+                isResolved = true;
                 resolve(element);
             } else {
                 requestAnimationFrame(check);
@@ -185,19 +214,23 @@ function waitForElement(selector) {
         check();
     });
 }
+/**Wait for multiple HTML elements to be created and resolve the promise once they're found.
+ * @param {string} selector - The CSS selector for the elements to wait for.
+ * @returns {Promise<HTMLElement[]>} A promise that resolves to an array of found elements.
+ */
 
 function waitForElements(selector) {
     return new Promise((resolve) => {
-        let isResolved = false; // Variable de contrôle
+        let isResolved = false; 
 
         function check() {
             if (isResolved) {
-                return; // Arrêtez la vérification une fois que les éléments ont été résolus
+                return; 
             }
 
             const elements = document.querySelectorAll(selector);
             if (elements.length > 0) {
-                isResolved = true; // Marquez la résolution comme terminée
+                isResolved = true; 
                 resolve(elements);
             } else {
                 requestAnimationFrame(check);
@@ -212,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
     addEventListeners();
  });
 
- // Fonction qui attends que le bouton contact et les coeurs soit crées pour utiliser l'event listener
+ // Various AddEvent Listeners 
 async function addEventListeners() {
     const modalBtn = await waitForElement(".contact_button");
     modalBtn.addEventListener("click", () => {
@@ -238,7 +271,7 @@ async function addEventListeners() {
 displayPhotographerProfile();
 let globalLikeCount = await displayPhotographerMedia();
 
-// Fonction d'accessibilité activer/desactiver la navigation en arrière plan
+// Disable background navigation to improve accessibility in Form.
 function desactiverNavigationArrierePlan() {
     const ElementsMain = document.querySelectorAll('main');
     ElementsMain.forEach(element => {
@@ -249,6 +282,7 @@ function desactiverNavigationArrierePlan() {
     });
 }
 
+// Enable navifation for accessibilité after closing Form.
 function activerNavigationArrierePlan() {
     const ElementsMain = document.querySelectorAll('main');
     ElementsMain.forEach(element => {
