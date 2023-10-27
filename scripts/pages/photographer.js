@@ -1,8 +1,8 @@
 import { fetchPhotographersData } from '../api/photographerData.js';
 import { PhotographerInfo } from '../class/photoinfo.js';
 import { MediasFactory } from '../class/mediaclass.js';
-import {displayModal, closeModal } from '../helpers/contactForm.js';
-import {displayLightbox} from '../helpers/lightbox.js'
+import { displayModal, closeModal } from '../helpers/contactForm.js';
+import { displayLightbox } from '../helpers/lightbox.js'
 
 // Recupération de l'Id transmise par  l'url
 const urlParams = new URLSearchParams(window.location.search);
