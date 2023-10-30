@@ -69,7 +69,7 @@
 
 /* photographer Sort filter CSS */
 .photograph-gallery-filter {
-    width: 360px;
+    width: 280px;
 }
  
 .dropdown {
@@ -84,6 +84,7 @@
 }
 
 .btn-select {
+    position :relative;
     background-color: #901c1c;
     border-color: transparent;
     border-radius: 5px;
@@ -93,15 +94,27 @@
     width: 170px;
     height: 69px;
     filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-.custom-arrow::after {
-    content: "▼";
+.line {
+    color : white;
 }
 
-.custom-arrow.open::after {
-    content: "▲";
+.fa-chevron-down {
+    position: relative;
+    color : white;
+    font-size: 1.2rem;
+    left: 240px;
+    z-index: 10;
 }
+
+.rotate {
+    transform: rotate(180deg);
+}
+
 
 /* Gallery CSS */
 .photograph-gallery-container {

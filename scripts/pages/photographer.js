@@ -5,8 +5,7 @@ import { displayModal, closeModal } from '../helpers/contactForm.js';
 import { displayLightbox } from '../helpers/lightbox.js'
 
 
-// Retrieval of the ID transmitted by the URL..
-
+/*****    Retrieval of the ID transmitted by the URL..   *****/
 const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get("id");
 
@@ -22,14 +21,15 @@ function selectPhotographerInfo(photographerId, photographers) {
 }
 
 /** Display the photographer's profile and information.
+ * @async
+ * @function
  */
-
 async function displayPhotographerProfile() {
     const photographerData = await fetchPhotographersData();
     const photographers = photographerData.photographers.map(photographer => new PhotographerInfo(photographer));
     const photographer = selectPhotographerInfo(photographerId, photographers);
     
-    // Données à afficher pour l'entête des informations du photographe
+    // Data to display for the photographer's information header.
     if (photographer) {
         const photographerProfilContainer = document.querySelector(".photograph-header");
         const PhotogInfoToDisplay =
@@ -45,11 +45,11 @@ async function displayPhotographerProfile() {
             <img class="photograph_picture" src='./assets/photographers/${photographer.portrait}' alt="portrait de ${photographer.name}">
         </div>
         `
-        // Ajouter le nom du photographe dans le formulaire
+        // Add the photographer's name to the form
         const contactPhotoName = document.querySelector(".contact_photographer_name");
         contactPhotoName.textContent = photographer.name;
 
-        // Afficher le prix et le nombre de like du photographe
+        // Display the photographer's price and the number of likes.
         const photographerLikesContainer = document.querySelector(".photograph-global-like");
         const likesAndPrice =
             `<aside class="photographer_counter" aria-label="footer" role="contentinfo"> 
@@ -61,7 +61,8 @@ async function displayPhotographerProfile() {
             </aside>
             `
         photographerLikesContainer.innerHTML = likesAndPrice;
-        // Appel de la fonction pour récupérer des données du photographe 
+
+        // Call the function to retrieve photographer data.
         photographerProfilContainer.innerHTML = PhotogInfoToDisplay;
     }
 }
@@ -70,6 +71,7 @@ let initialGlobalLikeCount = 0
 let photographerMedias = {}
 
 /** Display the photographer's media based on the selected sort option or by default (json order).
+ * @async
  * @param {string} selectedOption - The selected sorting option ("popularite", "date", "titre").
  */
 
@@ -245,8 +247,9 @@ document.addEventListener("DOMContentLoaded", function() {
     addEventListeners();
  });
 
- // Various AddEvent Listeners 
+ /****** Various AddEvent Listeners  *****/
 async function addEventListeners() {
+    // Add event listener for opening and closing the modal when the contact button is clicked.
     const modalBtn = await waitForElement(".contact_button");
     modalBtn.addEventListener("click", () => {
         desactiverNavigationArrierePlan();
@@ -256,12 +259,14 @@ async function addEventListeners() {
     const closeBtn = await waitForElement(".closemodal_button");
     closeBtn.addEventListener("click", closeModal); 
 
-    //Gestion des filtres : 
+    // Add click event listener for the selection element to toggle the rotation of the down arrow.
     const selectElement = document.getElementById("selection");
+    const arrow = document.querySelector(".fa-chevron-down")
     selectElement.addEventListener("click", (event) => {
-        selectElement.classList.add('ouvert');
+        arrow.classList.toggle('rotate');
     });
 
+    // Add change event listener for the selection element to display photographer media based on the selected option
     selectElement.addEventListener("change", (event) => {
         const selectedOption = event.target.value;
         displayPhotographerMedia(selectedOption);

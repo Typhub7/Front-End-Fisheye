@@ -34,7 +34,12 @@ const twoOrMoreRegEx = /.{2,}/;
 const messageSize = /^[a-zA-Z0-9\s.,!?-]{10,300}$/;
 
 // ----- Contact Form Check informations Function -----
-// Name and Firstname control
+/**
+ * Validates a first or last name and displays an error message if it doesn't meet the criteria.
+ * @function
+ * @param {string} firstOrName - The first or last name to validate.
+ * @param {HTMLElement} messageLoc - The HTML element where the error message should be displayed (Name or Firstname).
+ */
 function checkName(firstOrName,messageLoc) {
   if (!twoOrMoreRegEx.test(firstOrName)) {
     messageLoc.innerText = formErrors.shortName;
@@ -48,7 +53,10 @@ function checkName(firstOrName,messageLoc) {
   }
 }
 
-// Email control
+/** Validates an email address and displays an error message if it doesn't meet the criteria.
+ * @function
+ * @param {string} email - The email address to validate.
+ */
 function checkEmail(email) {
     if (!emailRegEx.test(email)) {
       messageMail.innerText = formErrors.badEmail;
@@ -59,7 +67,10 @@ function checkEmail(email) {
   }
 }
 
-// Message size and character control
+/** Validates the size and characters of a message and displays an error message if it doesn't meet the criteria.
+ * @function
+ * @param {string} message - The message text to validate.
+ */
 function checkMessageSize(message) {
   if (!messageSize.test(message)) {
     messageError.innerText = formErrors.badSize;
@@ -83,7 +94,6 @@ tagMessage.addEventListener('change', () => {checkMessageSize(tagMessage.value);
  */
 function submitAndFetch(event) {
   event.preventDefault()
-  
   errorDetected = false 
 
   try {
@@ -96,7 +106,6 @@ function submitAndFetch(event) {
       console.log("Le formulaire contient des erreurs. Veuillez les corriger.");
       return;
     }
-    console.log("Formulaire correctement rempli")
  
     const submissionForm = { 
       fistName : tagFirst.value,
@@ -104,11 +113,9 @@ function submitAndFetch(event) {
       email : tagEmail.value,
       message : tagMessage.value
       }
-      console.log("Données renvoyée par le formulaire :", submissionForm)
+    console.log("Données renvoyée par le formulaire :", submissionForm)
     form.reset();     // Remove It when validation fetch will be ok
     closeModal();
-    console.log("close Modal Ok")
-
 
   } catch(error) {
       console.error("Erreur lors de la soumission du formulaire")

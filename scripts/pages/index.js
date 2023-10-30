@@ -1,7 +1,10 @@
 import { fetchPhotographersData } from '../api/photographerData.js';
 
-// Cette fonction utilise la méthode fetch pour récupérer les données depuis le fichier JSON
-// Retourne les donnéees en ne récupérant que les données photographers
+/** Generates an HTML template for displaying photographer information.
+ * @function
+ * @param {Object} photographer - The photographer's data.
+ * @returns {Object} - An object containing the HTML template.
+ */
 function photographerTemplate(photographer) {
 
     const newPhotographerCard = 
@@ -21,9 +24,11 @@ function photographerTemplate(photographer) {
     return {newPhotographerCard}
 }  
 
-// Cette fonction reçoit  un tableau contennant les données des photographes
-// Elle cible le DOM section HMTL de classe .photographer_section
-// Pour chaque photographe, elle affiche la carte
+/** Displays photographer data by generating and appending HTML templates.
+ * @async
+ * @function
+ * @param {Array} photographers - An array of photographer data.
+ */
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     photographers.forEach((photographer) => {
@@ -32,9 +37,11 @@ async function displayData(photographers) {
     });
 }
 
-// Cette fonction démarre le processus de traitement.
+/** Initiates the data processing and rendering process.
+ * @async
+ * @function
+ */
 async function init() {
-    // Récupère les datas des photographes
     const { photographers } = await fetchPhotographersData();
     displayData(photographers);
 }

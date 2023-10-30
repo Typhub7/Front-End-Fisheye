@@ -20,13 +20,14 @@
     <main id="main">
       <section class="photograph-header"></section>
       <section class="photograph-gallery">
-        <div class="photograph-gallery-filter"> 
+        <div class="photograph-gallery-filter">
+          <i class="fa-solid fa-chevron-down"></i>
           <label class= "dropdown" for="selection">Trier par</label>
           <select  class="btn-select" name="select" id="selection"  aria-label="trier par" >
               <option tabindex="0" class="option" value="popularite" aria-current="page">Popularité</option>
-              <option disabled>──────────</option>
+              <option disabled class="line">──────────</option>
               <option tabindex="0"  class="option" value="date">Date</option>
-              <option disabled>──────────</option>
+              <option disabled class="line">──────────</option>
               <option tabindex="0" class="option" value="titre">Titre</option>
           </select>
         </div>
