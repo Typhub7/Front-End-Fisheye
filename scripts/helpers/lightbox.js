@@ -1,5 +1,9 @@
+/** Display and manage the lightbox for photographer's media.
+ * @param {Element} photographerMediaContainer - The container element for photographer's media.
+ * @param {Array} photographerMedias - An array of photographer's media objects.
+ * @param {number} photographerId - The ID of the photographer.
+ */
 export function displayLightbox (photographerMediaContainer,photographerMedias,photographerId ) {
-    // Elements du DOM et Variables
     const lightbox = document.querySelector('.lightbox-container');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxVideo = document.getElementById('lightbox-video');
@@ -9,7 +13,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
     const lightboxTitle = document.querySelector('.lightbox-title');
     let currentMediaIndex = 0;
  
-    // Fonction pour ouvrir la lightbox
+    // function to openLightbox
     function openLightbox(index) {
         lightbox.style.display = 'block';
         currentMediaIndex = index;
@@ -19,45 +23,46 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
             lightboxVideo.style.display = 'none';
             lightboxImage.style.display = 'block';
             lightboxImage.src = `./assets/images/${photographerId}/${media.image}`;
-            lightboxImage.alt = media.alt;
+            lightboxImage.alt = media.title;
             lightboxTitle.innerText = `${media.title}`;
         } else if (media.video) {
             lightboxVideo.src = `./assets/images/${photographerId}/${media.video}`;
+            lightboxImage.alt = media.title;
             lightboxImage.style.display = 'none';
             lightboxVideo.style.display = 'block';
             lightboxTitle.innerText = `${media.title}`;
         }   
     }
 
-    // Fonction pour fermer la lightbox
+    // function to close lightbox
     function closeLightbox() {
         lightbox.style.display = 'none';
     }
 
-    // Fonction pour afficher l'image précédente
+    // Display previous image
     function showPrevImage() {
         if (currentMediaIndex > 0) {
             currentMediaIndex--;
             openLightbox(currentMediaIndex);
         } else {
-            // Si c'est la première image, passez à la dernière
             currentMediaIndex = photographerMedias.length - 1;
             openLightbox(currentMediaIndex);
         }
     }
 
-    // Fonction pour afficher l'image suivante
+    // Display next image
     function showNextImage() {
         if (currentMediaIndex < photographerMedias.length - 1) {
             currentMediaIndex++;
             openLightbox(currentMediaIndex);
         } else {
-            // Si c'est la dernière image, revenez à la première
+
             currentMediaIndex = 0;
             openLightbox(currentMediaIndex);
         }
     }
-    // Gestion de l'evenement de l'ouverture de la lightbox
+
+    // Event listeneer to open Lightbox 
     photographerMediaContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('gallery_thumbnail')) {
             const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
@@ -71,7 +76,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
     prevButton.addEventListener('click', showPrevImage);
     nextButton.addEventListener('click', showNextImage);
 
-    // Fermer la lightbox en appuyant sur la touche "Echap"
+    // Event Listener to use escape to close and arrow to navigate
     document.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') {
             showPrevImage();

@@ -102,8 +102,8 @@ async function displayPhotographerMedia(selectedOption) {
     if (photographerMedias) {
         const mediaContent = photographerMedias.map(media => {
             const mediaItem = media.image
-                ? `<img class="gallery_thumbnail" src="./assets/images/${photographerId}/${media.image}" alt="${media.alt}">`
-                : `<video class="gallery_thumbnail" aria-label="${media.alt}">
+                ? `<img class="gallery_thumbnail" src="./assets/images/${photographerId}/${media.image}" alt = "${media.title}, closeup view">`
+                : `<video class="gallery_thumbnail" aria-label="${media.title}">
                     <source src="./assets/images/${photographerId}/${media.video}" type="video/mp4">
                    </video>`;
             return `
@@ -115,7 +115,7 @@ async function displayPhotographerMedia(selectedOption) {
                     <h2>${media.title}</h2>
                         <div class="number-heart" role="group" aria-label="Like button and number of likes">
                             <span class="numberLike">${media.likes}</span> 
-                            <button class="btn_like" type="button" aria-label="Like" data-id="${media.id}">
+                            <button class="btn_like" type="button" aria-label="likes" data-id="${media.id}">
                                 <i class="fa-regular fa-heart heart-empty visible" aria-hidden="true"></i>
                                 <i class="fa-solid fa-heart heart-full invisible" aria-hidden="true"></i>
                             </button> 
@@ -257,7 +257,11 @@ async function addEventListeners() {
     });
 
     const closeBtn = await waitForElement(".closemodal_button");
-    closeBtn.addEventListener("click", closeModal); 
+    closeBtn.addEventListener("click", () => {
+        activerNavigationArrierePlan();
+        closeModal(); 
+    });
+    
 
     // Add click event listener for the selection element to toggle the rotation of the down arrow.
     const selectElement = document.getElementById("selection");
@@ -278,22 +282,28 @@ let globalLikeCount = await displayPhotographerMedia();
 
 // Disable background navigation to improve accessibility in Form.
 function desactiverNavigationArrierePlan() {
-    const ElementsMain = document.querySelectorAll('main');
-    ElementsMain.forEach(element => {
-        const tabindexValue = element.getAttribute('tabindex');
-        if (tabindexValue === '0') {
+    const mainElement = document.querySelector("main");
+    const elementsArrierePlan = mainElement.querySelectorAll("*");
+    elementsArrierePlan.forEach(element => {
+        if (tabindexValue === '0' ) {
+            element.classList.add('')
             element.setAttribute('tabindex', '-1');
         }
+
     });
 }
 
+
 // Enable navifation for accessibilité after closing Form.
 function activerNavigationArrierePlan() {
-    const ElementsMain = document.querySelectorAll('main');
-    ElementsMain.forEach(element => {
-        const tabindexValue = element.getAttribute('tabindex');
-        if (tabindexValue === '-1') {
-            element.setAttribute('tabindex', '0');
+    const mainElement = document.querySelector("main");
+    const elementsArrierePlan = mainElement.querySelectorAll("*");
+    elementsArrierePlan.forEach(element => {
+        // Récupérer la valeur initiale de tabindex à partir de l'objet initialTabindexValues
+        const dataTabindexValue = initialTabindexValues[element];
+        if (dataTabindexValue !== undefined) {
+            // Restaurer la valeur initiale de tabindex
+            element.setAttribute('tabindex', dataTabindexValue);
         }
     });
 }
