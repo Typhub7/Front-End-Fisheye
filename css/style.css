@@ -21,6 +21,16 @@ li {
 	list-style-type: none;
 }
 
+h1 {
+    color: #901C1C;
+    margin-right: 100px;
+}
+
+h3 {
+    font-style: normal;
+    font-weight: 400; 
+}
+
 body {
     font-family: "DM Sans", sans-serif;
     width: 1340px;
@@ -35,16 +45,6 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
-}
-
-h1 {
-    color: #901C1C;
-    margin-right: 100px;
-}
-
-h3 {
-    font-style: normal;
-    font-weight: 400; 
 }
 
 .logo-container {

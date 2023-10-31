@@ -74,7 +74,6 @@ let photographerMedias = {}
  * @async
  * @param {string} selectedOption - The selected sorting option ("popularite", "date", "titre").
  */
-
 async function displayPhotographerMedia(selectedOption) {
     const photographerMediaContainer = document.querySelector(".photograph-gallery-container");
     if (Object.keys(photographerMedias).length === 0) {
@@ -138,6 +137,7 @@ async function displayPhotographerMedia(selectedOption) {
                 toggleHeart(event, likeCounters, mediaId, likeInitialCounterDOM);
             });
         });
+
         displayLightbox(photographerMediaContainer,photographerMedias,photographerId)
  
         updateGlobalLikesDisplay(initialGlobalLikeCount);
@@ -258,8 +258,8 @@ async function addEventListeners() {
 
     const closeBtn = await waitForElement(".closemodal_button");
     closeBtn.addEventListener("click", () => {
-        activerNavigationArrierePlan();
-        closeModal(); 
+        closeModal();
+        activerNavigationArrierePlan(); 
     });
     
 
@@ -280,30 +280,37 @@ async function addEventListeners() {
 displayPhotographerProfile();
 let globalLikeCount = await displayPhotographerMedia();
 
-// Disable background navigation to improve accessibility in Form.
-function desactiverNavigationArrierePlan() {
+
+// Disable background navigation to improve accessibility in Form and lightbox.
+export function desactiverNavigationArrierePlan() {
     const mainElement = document.querySelector("main");
     const elementsArrierePlan = mainElement.querySelectorAll("*");
     elementsArrierePlan.forEach(element => {
-        if (tabindexValue === '0' ) {
-            element.classList.add('')
-            element.setAttribute('tabindex', '-1');
+        if (element.classList.contains('tabindex')) {
+            console.log(element.getAttribute('tabindex'))
+            if (element.getAttribute('tabindex') === '0') {
+                console.log("celui la vaut 0")
+                element.classList.add('tabindexinit'); 
+                element.setAttribute('tabindex', '-1'); 
+            }
+        } else {
+            element.setAttribute('tabindex', '-1')
         }
-
     });
 }
 
-
-// Enable navifation for accessibilité after closing Form.
-function activerNavigationArrierePlan() {
+// Enable naviation for accessibility after closing Form and lightbox.
+export function activerNavigationArrierePlan() {
     const mainElement = document.querySelector("main");
     const elementsArrierePlan = mainElement.querySelectorAll("*");
     elementsArrierePlan.forEach(element => {
-        // Récupérer la valeur initiale de tabindex à partir de l'objet initialTabindexValues
-        const dataTabindexValue = initialTabindexValues[element];
-        if (dataTabindexValue !== undefined) {
-            // Restaurer la valeur initiale de tabindex
-            element.setAttribute('tabindex', dataTabindexValue);
+        if (element.classList.contains('tabindex')) {
+            if (element.classList.contains('tabindexinit')) {
+                element.setAttribute('tabindex', '0'); 
+                element.classList.remove('tabindexinit'); 
+            }
+        } else {
+            element.removeAttribute('tabindex');
         }
     });
 }

@@ -1,9 +1,11 @@
+import { desactiverNavigationArrierePlan,activerNavigationArrierePlan } from '../pages/photographer.js'
+
 /** Display and manage the lightbox for photographer's media.
  * @param {Element} photographerMediaContainer - The container element for photographer's media.
  * @param {Array} photographerMedias - An array of photographer's media objects.
  * @param {number} photographerId - The ID of the photographer.
  */
-export function displayLightbox (photographerMediaContainer,photographerMedias,photographerId ) {
+export function displayLightbox (photographerMediaContainer,photographerMedias,photographerId) {
     const lightbox = document.querySelector('.lightbox-container');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxVideo = document.getElementById('lightbox-video');
@@ -15,6 +17,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
  
     // function to openLightbox
     function openLightbox(index) {
+        desactiverNavigationArrierePlan();
         lightbox.style.display = 'block';
         currentMediaIndex = index;
         const media = photographerMedias[currentMediaIndex];
@@ -36,6 +39,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
 
     // function to close lightbox
     function closeLightbox() {
+        activerNavigationArrierePlan();
         lightbox.style.display = 'none';
     }
 
@@ -62,9 +66,19 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         }
     }
 
-    // Event listeneer to open Lightbox 
+    // Event listeneer to open Lightbox with click
     photographerMediaContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('gallery_thumbnail')) {
+            const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
+            if (index !== -1) {
+                openLightbox(index);
+            }
+        }
+    });
+
+    // Event listeneer to open Lightbox with enter key
+    photographerMediaContainer.addEventListener('keydown', (event) => {
+        if ( event.key === 'Enter') {
             const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
             if (index !== -1) {
                 openLightbox(index);
