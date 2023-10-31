@@ -39,6 +39,11 @@ body {
 
 /* general*/
 
+:focus {
+    outline: 5px double #901c1c;
+    border-radius: 5px;
+  }
+
 header {
     display: flex;
     flex-direction: row;

@@ -115,6 +115,7 @@ function submitAndFetch(event) {
       }
     console.log("Données renvoyée par le formulaire :", submissionForm)
     form.reset();     // Remove It when validation fetch will be ok
+    
     closeModal();
 
   } catch(error) {

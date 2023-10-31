@@ -9,7 +9,7 @@ function photographerTemplate(photographer) {
 
     const newPhotographerCard = 
     `
-    <article tabindex="0" aria-label="${photographer.name}">
+    <article aria-label="${photographer.name}">
         <a  href="photographer.html?id=${photographer.id}"> 
             <div class="photographer_imgcontainer">
                 <img class="photographer_picture" src='./assets/photographers/${photographer.portrait}' alt="Portrait de ${photographer.name}">          

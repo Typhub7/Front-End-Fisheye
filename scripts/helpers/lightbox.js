@@ -66,7 +66,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         }
     }
 
-    // Event listeneer to open Lightbox with click
+    // Event listener to open Lightbox with click
     photographerMediaContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('gallery_thumbnail')) {
             const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
@@ -76,7 +76,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         }
     });
 
-    // Event listeneer to open Lightbox with enter key
+    // Event listener to open Lightbox with enter key
     photographerMediaContainer.addEventListener('keydown', (event) => {
         if ( event.key === 'Enter') {
             const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
@@ -86,7 +86,16 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         }
     });
 
+    // Event listener to close X the lightbox
     closeLightboxButton.addEventListener('click', closeLightbox);
+    closeLightboxButton.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          closeLightbox();
+        }
+      });
+
+    // Event listener for next and previous button
+
     prevButton.addEventListener('click', showPrevImage);
     nextButton.addEventListener('click', showNextImage);
 
