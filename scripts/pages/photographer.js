@@ -283,6 +283,8 @@ let globalLikeCount = await displayPhotographerMedia();
 
 // Disable background navigation to improve accessibility in Form and lightbox.
 export function desactiverNavigationArrierePlan() {
+    const logoElement = document.querySelector(".logo");
+    logoElement.setAttribute('tabindex', '-1');
     const mainElement = document.querySelector("main");
     const elementsArrierePlan = mainElement.querySelectorAll("*");
     elementsArrierePlan.forEach(element => {
@@ -301,6 +303,8 @@ export function desactiverNavigationArrierePlan() {
 
 // Enable naviation for accessibility after closing Form and lightbox.
 export function activerNavigationArrierePlan() {
+    const logoElement = document.querySelector(".logo");
+    logoElement.setAttribute('tabindex', '0');
     const mainElement = document.querySelector("main");
     const elementsArrierePlan = mainElement.querySelectorAll("*");
     elementsArrierePlan.forEach(element => {

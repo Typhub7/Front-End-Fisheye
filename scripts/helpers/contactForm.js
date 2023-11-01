@@ -1,3 +1,5 @@
+import { activerNavigationArrierePlan } from '../pages/photographer.js'
+
 // ----- Contact Form Modal Open/Close -----
 export function displayModal() {
   const modal = document.querySelector("#contact_modal");
@@ -114,9 +116,9 @@ function submitAndFetch(event) {
       message : tagMessage.value
       }
     console.log("Données renvoyée par le formulaire :", submissionForm)
-    form.reset();     // Remove It when validation fetch will be ok
-    
+    form.reset();
     closeModal();
+    activerNavigationArrierePlan();
 
   } catch(error) {
       console.error("Erreur lors de la soumission du formulaire")
