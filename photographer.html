@@ -71,14 +71,18 @@
     </div>  
     <div class="lightbox-container">
       <div class="lightbox" aria-label="Media full view">
-          <span class="close-lightbox" id="close-lightbox" aria-label="Close dialog" tabindex="0">&times;</span>
-          <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous media">&lt;</button>
+          <span class="close-lightbox fa-solid fa-xmark" id="close-lightbox" aria-label="Close dialog" tabindex="0"></span>
+          <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous media">
+            <span class="fa-solid fa-chevron-left" aria-label="Previous media"></span>
+          </button>
           <div class="lightbox-area">
             <img class="lightbox-image" id="lightbox-image" src="" alt="" aria-label="">
             <video controls class="lightbox-video" id="lightbox-video" src="" alt="" aria-label=""></video>
             <h2 class="lightbox-title" tabindex="0"></h2>
           </div>
-          <button class="lightbox-next" id="lightbox-next" aria-label="Next media">&gt;</button>
+          <button class="lightbox-next" id="lightbox-next" aria-label="Next media">
+            <span class="fa-solid fa-chevron-right"></span>
+          </button>
 
       </div>
     </div>

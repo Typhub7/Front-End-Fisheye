@@ -111,11 +111,6 @@
     z-index: 10;
 }
 
-.rotate {
-    transform: rotate(180deg);
-}
-
-
 /* Gallery CSS */
 .photograph-gallery-container {
     display: flex;
@@ -180,14 +175,6 @@
 .heart-empty {
     color: #901C1C;
     font-size: 1.2rem;
-}
-
-.visible {
-    opacity: 1;
-}
-
-.invisible {
-    opacity: 0;
 }
 
 .photograph-global-like {

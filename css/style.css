@@ -1,48 +1,14 @@
 @import url("photographer.css");
 @import url("form.css");
 @import url("lightbox.css");
+@import url("normalize.css");
 
-/* normalize */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-	font-family: 'DM Sans', sans-serif;
-}
-
-a {
-	text-decoration: none;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-li {
-	list-style-type: none;
-}
-
-h1 {
-    color: #901C1C;
-    margin-right: 100px;
-}
-
-h3 {
-    font-style: normal;
-    font-weight: 400; 
-}
-
+/* general*/
 body {
     font-family: "DM Sans", sans-serif;
     width: 1340px;
     margin: 0 auto;
 }
-
-/* general*/
-
-:focus {
-    outline: 5px double #901c1c;
-    border-radius: 5px;
-  }
 
 header {
     display: flex;
@@ -97,7 +63,6 @@ header {
     position: absolute;
     right : -35px;
     top : -25px;
-
 }
 
 .photographer_imgcontainer {

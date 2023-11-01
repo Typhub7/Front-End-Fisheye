@@ -1,0 +1,51 @@
+/* normalize */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+	font-family: 'DM Sans', sans-serif;
+}
+
+a {
+	text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+li {
+	list-style-type: none;
+}
+
+h1 {
+    color: #901C1C;
+    margin-right: 100px;
+    cursor: default; 
+}
+
+h2,p {
+    cursor: default; 
+}
+
+h3 {
+    font-style: normal;
+    font-weight: 400;
+    cursor: default; 
+}
+
+:focus {
+    outline: 5px double #901c1c;
+    border-radius: 5px;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+.visible {
+    opacity: 1;
+}
+
+.invisible {
+    opacity: 0;
+}
