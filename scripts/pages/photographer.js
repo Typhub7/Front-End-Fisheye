@@ -94,6 +94,7 @@ async function displayPhotographerMedia(selectedOption) {
             photographerMedias.sort((a, b) => a.title.localeCompare(b.title));
         } 
     }
+    
     // Calculate the total sum of the photographer's media likes
     initialGlobalLikeCount = photographerMedias.reduce((total, photographerMedias) => total + photographerMedias.likes, 0);
   

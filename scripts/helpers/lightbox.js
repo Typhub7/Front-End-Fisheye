@@ -65,7 +65,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
             openLightbox(currentMediaIndex);
         }
     }
-    
+
     // Track if lightbox is open :
     let isLightboxOpen = false;
 
@@ -91,8 +91,12 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
         }
     });
 
-    // Event listener to close X the lightbox
-    closeLightboxButton.addEventListener('click', closeLightbox);
+    // Event listener to close the lightbox
+    closeLightboxButton.addEventListener('click', () => {
+        closeLightbox();
+        isLightboxOpen = false;
+    });
+    
     closeLightboxButton.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           closeLightbox();
