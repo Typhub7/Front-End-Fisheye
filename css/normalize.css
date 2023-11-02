@@ -33,7 +33,7 @@ h3 {
     cursor: default; 
 }
 
-:focus {
+:focus:not(:hover) {
     outline: 5px double #901c1c;
     border-radius: 5px;
 }

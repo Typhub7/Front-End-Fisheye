@@ -23,7 +23,7 @@ const messageName = document.querySelector("#message-name")
 const messageMail = document.querySelector("#message-mail")
 const messageError = document.querySelector("#message-error")
 let errorDetected = false
-const formErrors = { shortName : "Il faut au minimum 2 charactères.",
+const formErrors = { shortName : "Il faut entre 2 et 30 caractères.",
                    badName : "Un caractère n'est pas reconnu. Merci de corriger.",
                    badEmail : "Veuillez renseigner une adresse mail valide.",
                    badSize : "Entre 10 et 300 caractères et pas de charactères spéciaux."
@@ -31,8 +31,9 @@ const formErrors = { shortName : "Il faut au minimum 2 charactères.",
                    
 // ------ Regular Expression RegEx ------
 const nameFirstRegEx = new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$") 
-const emailRegEx = new RegExp("^[a-zA-Z0-9._-]{2,}@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$")
-const twoOrMoreRegEx = /.{2,}/;
+const emailRegEx = /^(?=.{5,30}$)[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+//const emailRegEx = new RegExp("^[a-zA-Z0-9._-]{1,}@[a-zA-Z0-9.-]{1,}\.[a-zA-Z]{2,}$")
+const twoOrMoreRegEx = /^.{2,30}$/;
 const messageSize = /^[a-zA-Z0-9\s.,!?-]{10,300}$/;
 
 // ----- Contact Form Check informations Function -----

@@ -65,6 +65,9 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
             openLightbox(currentMediaIndex);
         }
     }
+    
+    // Track if lightbox is open :
+    let isLightboxOpen = false;
 
     // Event listener to open Lightbox with click
     photographerMediaContainer.addEventListener('click', (event) => {
@@ -72,6 +75,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
             const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
             if (index !== -1) {
                 openLightbox(index);
+                isLightboxOpen = true;
             }
         }
     });
@@ -82,6 +86,7 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
             const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
             if (index !== -1) {
                 openLightbox(index);
+                isLightboxOpen = true;
             }
         }
     });
@@ -91,22 +96,25 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
     closeLightboxButton.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           closeLightbox();
+          isLightboxOpen = false;
         }
       });
 
     // Event listener for next and previous button
-
     prevButton.addEventListener('click', showPrevImage);
     nextButton.addEventListener('click', showNextImage);
 
     // Event Listener to use escape to close and arrow to navigate
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowLeft') {
-            showPrevImage();
-        } else if (event.key === 'ArrowRight') {
-            showNextImage();
-        } else if (event.key === 'Escape') {
-            closeLightbox();
+        if (isLightboxOpen) {
+            if (event.key === 'ArrowLeft') {
+                showPrevImage();
+            } else if (event.key === 'ArrowRight') {
+                showNextImage();
+            } else if (event.key === 'Escape') {
+                closeLightbox();
+                isLightboxOpen = false;
+            }
         }
     });
 }
