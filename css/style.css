@@ -6,7 +6,7 @@
 /* general*/
 body {
     font-family: "DM Sans", sans-serif;
-    width: 1340px;
+    width: 1200px;
     margin: 0 auto;
 }
 
@@ -16,11 +16,8 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
-}
-
-.logo-container {
-    position : relative;
-    left : 100px;
+    width: 90%;
+    margin : auto;
 }
 
 .logo {

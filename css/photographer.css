@@ -2,7 +2,7 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin: 0 55px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -64,7 +64,7 @@
 .photograph-gallery {
     display : flex;
     flex-direction: column;
-    margin: 35px 100px 0 100px;
+    margin: 35px 55px 0 55px;
 }
 
 /* photographer Sort filter CSS */
@@ -117,20 +117,20 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap : 45px;
+    gap : 35px;
     margin-top: 35px;
 }
 
 .gallery_thumbnail {
-  height: 300px;
-  width: 350px; 
+  height: 290px;
+  width: 340px; 
   border-radius: 5px;
   object-fit: cover;
   object-position: center;
 }
 
 .gallery_card figcaption {
-    width: 350px;
+    width: 340px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
