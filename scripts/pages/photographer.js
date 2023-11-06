@@ -255,14 +255,7 @@ async function addEventListeners() {
     modalBtn.addEventListener("click", () => {
         desactiverNavigationArrierePlan();
         displayModal();
-    });
-
-    const closeBtn = await waitForElement(".closemodal_button");
-    closeBtn.addEventListener("click", () => {
-        closeModal();
-        activerNavigationArrierePlan(); 
-    });
-    
+    }); 
 
     // Add click event listener for the selection element to toggle the rotation of the down arrow.
     const selectElement = document.getElementById("selection");
@@ -284,8 +277,10 @@ let globalLikeCount = await displayPhotographerMedia();
 
 // Disable background navigation to improve accessibility in Form and lightbox.
 export function desactiverNavigationArrierePlan() {
-    const logoElement = document.querySelector(".logo");
-    logoElement.setAttribute('tabindex', '-1');
+    const logoElements = document.querySelectorAll(".logo");
+    logoElements.forEach((logoElement, index) => {
+        logoElement.setAttribute('tabindex', index + 1);
+    });
     const mainElement = document.querySelector("main");
     const elementsArrierePlan = mainElement.querySelectorAll("*");
     elementsArrierePlan.forEach(element => {

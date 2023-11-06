@@ -1,18 +1,26 @@
 import { activerNavigationArrierePlan } from '../pages/photographer.js'
 
+// Track if Contact Modal is open :
+let isModalFormOpen = false;
+
 // ----- Contact Form Modal Open/Close -----
 export function displayModal() {
   const modal = document.querySelector("#contact_modal");
 	modal.style.display = "block";
+  isModalFormOpen = true;
 }
 
 export function closeModal() {
   const modal = document.querySelector("#contact_modal");
   modal.style.display = "none";
+  isModalFormOpen = false;
 }
 
 // ------ DOM Elements ------
 const form = document.querySelector("form")
+const closeBtn = document.querySelector(".closemodal_button")
+const fields = document.querySelectorAll('.text-control')
+
 const tagFirst = document.querySelector("#first")
 const tagLast = document.querySelector("#last")
 const tagEmail = document.querySelector("#email")
@@ -27,7 +35,7 @@ const formErrors = { shortName : "Il faut entre 2 et 30 caractères.",
                    badName : "Un caractère n'est pas reconnu. Merci de corriger.",
                    badEmail : "Veuillez renseigner une adresse mail valide.",
                    badSize : "Entre 10 et 300 caractères et pas de charactères spéciaux."
-}  
+}
                    
 // ------ Regular Expression RegEx ------
 const nameFirstRegEx = new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$") 
@@ -126,5 +134,48 @@ function submitAndFetch(event) {
   }
 }
 
+
 // ------ Form Submit Event Listeneer ------ 
 form.addEventListener("submit", event => submitAndFetch(event))
+
+closeBtn.addEventListener("click", () => {
+    closeModal();
+    activerNavigationArrierePlan(); 
+    isModalFormOpen = false;
+});
+
+document.addEventListener('keydown', (event) => {
+  if (isModalFormOpen) {
+      if (event.key === 'ArrowLeft') {
+        navigateToPreviousField();
+      } else if (event.key === 'ArrowRight') {
+        navigateToNextField();
+      } else if (event.key === 'Escape') {
+        closeModal();
+      } 
+  }
+});
+
+/**
+ * Navigates to the previous form field when the "ArrowLeft" key is pressed.
+ */
+function navigateToPreviousField() {
+  const currentField = document.activeElement;
+  const currentIndex = Array.from(fields).indexOf(currentField);
+
+  if (currentIndex > 0) {
+    fields[currentIndex - 1].focus();
+  }
+}
+
+/**
+ * Navigates to the next form field when the "ArrowRight" key is pressed.
+ */
+function navigateToNextField() {
+  const currentField = document.activeElement;
+  const currentIndex = Array.from(fields).indexOf(currentField);
+
+  if (currentIndex < fields.length - 1) {
+    fields[currentIndex + 1].focus();
+  }
+}
