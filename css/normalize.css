@@ -48,3 +48,9 @@ h3 {
 .invisible {
     opacity: 0;
 }
+
+button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+}

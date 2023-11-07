@@ -21,16 +21,25 @@
       <div class="photograph-header"></div>
       <div class="photograph-gallery">
         <div class="photograph-gallery-filter">
-          <span class="fa-solid fa-chevron-down"></span>
-          <label class= "dropdown" for="selection">Trier par</label>
-          <select  class="btn-select" name="select" id="selection"  aria-label="trier par" >
-              <option tabindex="0" class="option" value="popularite" aria-current="page">Popularité</option>
-              <option disabled tabindex="-1" class="line">──────────</option>
-              <option tabindex="0"  class="option" value="date">Date</option>
-              <option disabled tabindex="-1" class="line">──────────</option>
-              <option tabindex="0" class="option" value="titre">Titre</option>
-          </select>
-        </div>
+          <label class="dropdown" for="selection">Trier par</label>
+          <div class="dropLayering">
+            <button class="btn_drop" type="button" role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="filter options" aria-label="Sort by">
+              <span id="default_option">Popularité</span>
+              <span class="fa-solid fa-chevron-down"></span>
+            </button>
+            <div class="btn_select" id="selection">
+              <li role="option"> 
+                <button class="option" data-value="popularite">Popularité</button>
+              </li>
+              <li role="option">
+                <button class="option" data-value="date">Date</button>
+              </li>
+              <li role="option">
+                <button class="option" data-value="titre">Titre</button>
+              </li>
+            </div>
+          </div>
+        </div>        
         <div class="photograph-gallery-container"></div>
       </div>
       <div class="photograph-global-like"></div>

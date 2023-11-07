@@ -68,47 +68,87 @@
 }
 
 /* photographer Sort filter CSS */
-.photograph-gallery-filter {
-    width: 280px;
-}
- 
-.dropdown {
-    width: 75px;
-    height: 24px;
-    line-height: 1.5rem;
-    font-family: DM Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 1.125rem;
-    color: #000000;
-}
 
-.btn-select {
-    position :relative;
-    background-color: #901c1c;
-    border-color: transparent;
-    border-radius: 5px;
-    color: white;
-    font-size: 1.125rem;
-    padding: 10px;
-    width: 170px;
-    height: 69px;
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.line {
-    color : white;
-}
-
-.fa-chevron-down {
+.filter_section{
     position: relative;
-    color : white;
-    font-size: 1.2rem;
-    left: 240px;
+    height: 100%;
+}
+
+.photograph-gallery-filter {
+    display: flex;
+    flex-direction: row;
+    gap : 10px;
+}
+
+.dropLayering {
     z-index: 10;
+    position: absolute;
+    left : 130px;
+    top : 407px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.btn_select {
+    max-height: 0;
+    background-color: #901C1C;
+    transition: max-height .1s ease-in-out;
+}
+
+.btn_select li {
+    position: relative;
+    width: 150px;
+}
+
+.btn_select li::before{
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 1px;
+    background-color: white;
+}
+
+.btn_drop,
+.btn_select li button{
+    background-color: #901C1C;
+    height: 58px;
+    padding: 15px;
+    font-size: 1.125rem;
+    color: white;
+
+}
+/*
+.btn-select {
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+}*/
+
+
+.btn_drop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    background-color: #901C1C;
+}
+
+.btn_select li button {
+    width: 100%;
+    text-align: left;
+}
+
+.btn_select li button:hover,
+.btn_select li button:focus,
+.btn_drop:hover,
+.btn_drop:focus{
+    background-color: #DB8876;
+    color: black;
+}
+
+.expend_drop {
+    max-height: 200px;
 }
 
 /* Gallery CSS */

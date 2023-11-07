@@ -20,10 +20,7 @@ function selectPhotographerInfo(photographerId, photographers) {
     return photographers.find(photographer => photographer.id == photographerId);
 }
 
-/** Display the photographer's profile and information.
- * @async
- * @function
- */
+/** Display the photographer's profile and information.*/
 async function displayPhotographerProfile() {
     const photographerData = await fetchPhotographersData();
     const photographers = photographerData.photographers.map(photographer => new PhotographerInfo(photographer));
@@ -178,16 +175,19 @@ function toggleHeart (event, likeCounters, mediaId, likeInitialCounterDOM) {
     }
 }
 
-/** Update the display of individual like counts.
- * @param {number} newIndivLike - The new individual like count.
- * @param {HTMLElement} likeInitialCounterDOM - The DOM element displaying the initial like count.
+/** Update the global of individual like counts.
+ * @param {number} newGlobalLike - The new individual like count.
  */
-
 async function updateGlobalLikesDisplay(newGlobalLike) {
     const likesCounter = await waitForElement(".likes_counter");
     likesCounter.textContent = newGlobalLike;
 }
 
+
+/** Update the display of individual like counts.
+ * @param {number} newIndivLike - The new individual like count.
+ * @param {HTMLElement} likeInitialCounterDOM - The DOM element displaying the initial like count.
+ */
 async function updateIndivLikesDisplay(newIndivLike, likeInitialCounterDOM) {
     likeInitialCounterDOM.textContent = newIndivLike;
 }
@@ -248,28 +248,80 @@ document.addEventListener("DOMContentLoaded", function() {
     addEventListeners();
  });
 
- /****** Various AddEvent Listeners  *****/
+/**
+ * Event listener for opening/closing the modal when the contact button is clicked.
+ * @returns {Promise<void>} Resolves when the event listener is added.
+ */
 async function addEventListeners() {
-    // Add event listener for opening and closing the modal when the contact button is clicked.
+    // 
     const modalBtn = await waitForElement(".contact_button");
     modalBtn.addEventListener("click", () => {
         desactiverNavigationArrierePlan();
         displayModal();
     }); 
-
-    // Add click event listener for the selection element to toggle the rotation of the down arrow.
-    const selectElement = document.getElementById("selection");
-    const arrow = document.querySelector(".fa-chevron-down")
-    selectElement.addEventListener("click", (event) => {
-        arrow.classList.toggle('rotate');
-    });
-
-    // Add change event listener for the selection element to display photographer media based on the selected option
-    selectElement.addEventListener("change", (event) => {
-        const selectedOption = event.target.value;
-        displayPhotographerMedia(selectedOption);
-    });
 }
+
+// ****** Dropbox DOM element ***** /
+const expendDropButton = document.querySelector(".btn_drop");
+const arrow = document.querySelector(".fa-chevron-down");
+const filterMenu = document.querySelector(".btn_select");
+const options = filterMenu.querySelectorAll(".option");
+const filterButtons = document.querySelectorAll(".btn_select button");
+
+function ouvertureDropbox() {
+    expendDropButton.setAttribute("aria-expanded", true);
+    filterMenu.classList.add("expend_drop");
+    arrow.classList.add("rotate");
+    filterMenu.setAttribute("aria-hidden", "false");
+    filterButtons.forEach(button => button.setAttribute("tabindex", "0"));
+}
+
+function fermetureDropbox() {
+    expendDropButton.setAttribute("aria-expanded", false);
+    filterMenu.classList.remove("expend_drop");
+    arrow.classList.remove("rotate");
+    filterMenu.setAttribute("aria-hidden", "true");
+    filterButtons.forEach(button => button.setAttribute("tabindex", "-1"));
+}
+
+expendDropButton.addEventListener("click", () => {
+    const isExpanded = expendDropButton.getAttribute("aria-expanded") === "true";
+    if (isExpanded) {
+        fermetureDropbox();
+    } else {
+        ouvertureDropbox();
+    }
+});
+
+/** Initialize event listeners for filter buttons and set the default selected filter for display.
+ * @param {HTMLElement} defaultOption - The element representing the currently selected filter.
+ * @param {HTMLElement[]} allOptions - An array of filter buttons.
+ */
+const defaultOption = document.querySelector('#default_option');
+const allOptions = Array.from(document.querySelectorAll('.btn_select li button'))
+
+// Diplaying the choosen option
+let chosenOption = allOptions.find(filter => filter.textContent == defaultOption.textContent);
+chosenOption.style.display = 'none';
+
+allOptions.forEach(filter => {
+    filter.addEventListener('click', () => {
+        defaultOption.textContent = filter.textContent;
+        if (chosenOption) chosenOption.style.display = 'block';   
+        chosenOption = filter;
+        chosenOption.style.display = 'none';
+        fermetureDropbox()
+    })
+});
+
+// Gallery image sorting 
+options.forEach(option => {
+    option.addEventListener("click", () => {
+        const selectedValue = option.getAttribute("data-value");
+        displayPhotographerMedia(selectedValue);
+    });
+});
+
 
 displayPhotographerProfile();
 let globalLikeCount = await displayPhotographerMedia();
