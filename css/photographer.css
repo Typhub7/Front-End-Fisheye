@@ -67,26 +67,26 @@
     margin: 35px 55px 0 55px;
 }
 
-/* photographer Sort filter CSS */
-
-.filter_section{
-    position: relative;
-    height: 100%;
-}
+/* Gallery Sort */
 
 .photograph-gallery-filter {
     display: flex;
     flex-direction: row;
     gap : 10px;
+    position: relative;
+    height: 60px;
 }
 
 .dropLayering {
     z-index: 10;
-    position: absolute;
-    left : 130px;
-    top : 407px;
     border-radius: 5px;
+    position: absolute;
+    left : 80px;
     overflow: hidden;
+}
+
+.dropdown {
+    align-self: center;
 }
 
 .btn_select {
@@ -120,11 +120,6 @@
     color: white;
 
 }
-/*
-.btn-select {
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
-}*/
-
 
 .btn_drop {
     display: flex;

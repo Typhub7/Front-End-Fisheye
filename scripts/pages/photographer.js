@@ -300,14 +300,15 @@ expendDropButton.addEventListener("click", () => {
 const defaultOption = document.querySelector('#default_option');
 const allOptions = Array.from(document.querySelectorAll('.btn_select li button'))
 
-// Diplaying the choosen option
+// Diplaying the chosen option
 let chosenOption = allOptions.find(filter => filter.textContent == defaultOption.textContent);
 chosenOption.style.display = 'none';
 
 allOptions.forEach(filter => {
     filter.addEventListener('click', () => {
         defaultOption.textContent = filter.textContent;
-        if (chosenOption) chosenOption.style.display = 'block';   
+        if (chosenOption) 
+        chosenOption.style.display = 'block'; 
         chosenOption = filter;
         chosenOption.style.display = 'none';
         fermetureDropbox()
@@ -322,10 +323,68 @@ options.forEach(option => {
     });
 });
 
+// Enable arrow navigation when select display is open :
+const selectNavButtons = document.querySelectorAll(".btn_select button, .btn_drop");
+let currentIndex = 0;
+/*
+function previoustabindex() {
+     if (currentIndex > 0) {
+      currentIndex--;   
+    } else {
+      currentIndex = selectNavButtons.length - 1;
+    }
+    selectNavButtons[currentIndex].focus();
+  }
+  
+function nexttabindex() {
+     if (currentIndex < selectNavButtons.length - 1) {
+      currentIndex++;
+    } else {
+      currentIndex = 0;
+    }
+    selectNavButtons[currentIndex].focus();
+  }*/
+
+  function previoustabindex() {
+    if (currentIndex > 0) {
+        if (currentIndex === 2) {
+            currentIndex--;
+        }
+        currentIndex--;
+    } else {
+        currentIndex = selectNavButtons.length - 1;
+    }
+    selectNavButtons[currentIndex].focus();
+  }
+  
+  function nexttabindex() {
+    currentIndex++;
+    if (currentIndex === 1) {
+        currentIndex++;
+    }
+    
+    if (currentIndex >= selectNavButtons.length) {
+        currentIndex = 0;
+    }
+    selectNavButtons[currentIndex].focus();
+  }
+
+
+document.addEventListener('keydown', (event) => {
+    if (expendDropButton.getAttribute("aria-expanded") === "true") {
+        if (event.key === 'ArrowUp') {
+          previoustabindex();
+          event.preventDefault();
+        } else if (event.key === 'ArrowDown') {
+          nexttabindex();
+          event.preventDefault();
+        } 
+    }
+  });
+
 
 displayPhotographerProfile();
 let globalLikeCount = await displayPhotographerMedia();
-
 
 // Disable background navigation to improve accessibility in Form and lightbox.
 export function desactiverNavigationArrierePlan() {
