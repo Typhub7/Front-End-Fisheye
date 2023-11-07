@@ -326,24 +326,6 @@ options.forEach(option => {
 // Enable arrow navigation when select display is open :
 const selectNavButtons = document.querySelectorAll(".btn_select button, .btn_drop");
 let currentIndex = 0;
-/*
-function previoustabindex() {
-     if (currentIndex > 0) {
-      currentIndex--;   
-    } else {
-      currentIndex = selectNavButtons.length - 1;
-    }
-    selectNavButtons[currentIndex].focus();
-  }
-  
-function nexttabindex() {
-     if (currentIndex < selectNavButtons.length - 1) {
-      currentIndex++;
-    } else {
-      currentIndex = 0;
-    }
-    selectNavButtons[currentIndex].focus();
-  }*/
 
   function previoustabindex() {
     if (currentIndex > 0) {
