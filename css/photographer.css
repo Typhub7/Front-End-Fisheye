@@ -184,6 +184,7 @@
     border: none;
     width: 1.5rem;
     position : relative;
+    max-height: 27px;
 }
 
 .numberLike {
