@@ -21,13 +21,13 @@
       <div class="photograph-header"></div>
       <div class="photograph-gallery">
         <div class="photograph-gallery-filter">
-          <label class="dropdown" for="selection">Trier par</label>
+          <h3 class="dropdown">Trier par</h3 >
           <div class="dropLayering">
-            <button class="btn_drop" type="button" role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="filter options" aria-label="Sort by">
+            <button class="btn_drop" type="button" role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="selection" aria-label="Sort by">
               <span id="default_option">Popularité</span>
               <span class="fa-solid fa-chevron-down"></span>
             </button>
-            <ul class="btn_select" id="selection">
+            <ul class="btn_select" id="selection" role="listbox">
               <li role="option"> 
                 <button class="option" data-value="popularite" tabindex="-1">Popularité</button>
               </li>
@@ -37,7 +37,7 @@
               <li role="option">
                 <button class="option" data-value="titre" tabindex="-1">Titre</button>
               </li>
-            </div>
+            </ul>
           </div>
         </div>        
         <div class="photograph-gallery-container"></div>
@@ -56,21 +56,21 @@
         <form class="form-body" name="formulaire" action="index.html" method="get" >
           <div class="form-data">
             <label class="first-label" for="first">Prénom</label>
-            <input class="text-control" type="text" id="first" name="first" aria-labelledby="first"><br>
+            <input class="text-control" type="text" id="first" name="first" aria-labelledby="first">
           </div>
           <span class="form-alert" id="message-first"></span>
           <div class="form-data">
-            <label class="last-label" for="last">Nom</label><br>
-            <input class="text-control" type="text" id="last" name="last" aria-labelledby="last"><br>
+            <label class="last-label" for="last">Nom</label>
+            <input class="text-control" type="text" id="last" name="last" aria-labelledby="last">
           </div>
           <span class="form-alert" id="message-name"></span>
           <div class="form-data">
-            <label class="email-label" for="email">Email</label><br>
-            <input class="text-control" type="email" id="email" name="email" aria-labelledby="email"><br>
+            <label class="email-label" for="email">Email</label>
+            <input class="text-control" type="email" id="email" name="email" aria-labelledby="email">
           </div>
           <span class="form-alert" id="message-mail"></span>
           <div class="form-data">
-            <label class="message-label" for="message">Votre message</label><br>
+            <label class="message-label" for="message">Votre message</label>
             <textarea class="text-control" id="message" name="message" rows="4" cols="50" aria-labelledby="message"></textarea>
           </div>
           <span class="form-alert" id="message-error"></span>
