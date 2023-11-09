@@ -151,6 +151,8 @@ document.addEventListener('keydown', (event) => {
       } else if (event.key === 'ArrowRight') {
         navigateToNextField();
       } else if (event.key === 'Escape') {
+        activerNavigationArrierePlan(); 
+        isModalFormOpen = false;
         closeModal();
       } 
   }
