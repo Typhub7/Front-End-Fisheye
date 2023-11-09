@@ -70,12 +70,16 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
     let isLightboxOpen = false;
 
     // Event listener to open Lightbox with click
-    photographerMediaContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('gallery_thumbnail')) {
-            const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
-            if (index !== -1) {
-                openLightbox(index);
-                isLightboxOpen = true;
+    photographerMediaContainer.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const anchorElement = event.target.closest('a');
+            if (anchorElement) {
+                event.preventDefault();
+                const index = photographerMedias.findIndex(media => media.id == anchorElement.dataset.media);
+                if (index !== -1) {
+                    openLightbox(index);
+                    isLightboxOpen = true;
+                }
             }
         }
     });

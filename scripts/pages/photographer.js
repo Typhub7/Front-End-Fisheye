@@ -323,7 +323,7 @@ options.forEach(option => {
     });
 });
 
-// Enable arrow navigation when select display is open :
+// Enable arrow navigation when the dropbox is open :
 const selectNavButtons = document.querySelectorAll(".btn_select button, .btn_drop");
 let currentIndex = 0;
 
@@ -352,6 +352,8 @@ let currentIndex = 0;
   }
 
 
+// Event listeneer for Arrow and Tab auto-closing for DropBox
+let tabCounter = 0;
 document.addEventListener('keydown', (event) => {
     if (expendDropButton.getAttribute("aria-expanded") === "true") {
         if (event.key === 'ArrowUp') {
@@ -360,9 +362,15 @@ document.addEventListener('keydown', (event) => {
         } else if (event.key === 'ArrowDown') {
           nexttabindex();
           event.preventDefault();
-        } 
+        } else if (event.key === 'Tab' && tabCounter === 2 && !event.shiftKey) {
+            fermetureDropbox();
+        } else if (event.key === 'Tab'&& !event.shiftKey) {
+            tabCounter++;
+        } else if (event.key === 'Tab' && event.shiftKey) {
+            tabCounter--;
+        }
     }
-  });
+});
 
 
 displayPhotographerProfile();
