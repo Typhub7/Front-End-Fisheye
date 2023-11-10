@@ -69,7 +69,17 @@ export function displayLightbox (photographerMediaContainer,photographerMedias,p
     // Track if lightbox is open :
     let isLightboxOpen = false;
 
-    // Event listener to open Lightbox with click
+    // Event listener to open Lightbox with click and with enter key
+    photographerMediaContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('gallery_thumbnail')) {
+            const index = photographerMedias.findIndex(media => media.id == event.target.closest('a').dataset.media);
+            if (index !== -1) {
+                openLightbox(index);
+                isLightboxOpen = true;
+            }
+        }
+    });
+
     photographerMediaContainer.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const anchorElement = event.target.closest('a');
